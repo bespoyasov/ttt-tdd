@@ -1,0 +1,7 @@
+header .text {
+  min-height:100vh;
+}
+
+header h2 {
+  margin-top:8rem;
+}

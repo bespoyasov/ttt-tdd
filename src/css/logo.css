@@ -1,0 +1,36 @@
+.tic, 
+.tac {
+  display: inline-block;
+  vertical-align: top;
+  width: 2rem;
+  height:3rem;
+  position: relative;
+}
+
+.tic:before,
+.tic:after {
+  position: absolute;
+  content: ' ';
+  height: 2.2rem;
+  width: 6px;
+  left: 0.8rem;
+  top: 0.2rem;
+  background: black;
+}
+.tic:before {
+  transform: rotate(45deg);
+}
+.tic:after {
+  transform: rotate(-45deg);
+}
+
+.tac:before {
+  position: absolute;
+  content:' ';
+  border: 6px solid black;
+  width: 1.2rem;
+  height: 1.2rem;
+  top: 0.3rem;
+  left: 0.3rem;
+  border-radius: 50%;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ttt-tdd",
+  "version": "0.1.0",
+  "description": "Пример разработки «Крестиков-ноликов» по ТДД",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bespoyasov/ttt-tdd.git"
+  },
+  "keywords": [
+    "tdd",
+    "tic-tac-toe",
+    "development",
+    "game",
+    "javascript"
+  ],
+  "author": "bespoyasov.ru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bespoyasov/ttt-tdd/issues"
+  },
+  "homepage": "https://github.com/bespoyasov/ttt-tdd#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-import-css": "^0.1.3",
+    "gulp-include": "^2.3.1",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-watch": "^5.0.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.1.0",
+    "gulp-typograf": "^3.1.0"
+  }
+}

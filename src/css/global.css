@@ -64,6 +64,12 @@ pre {
   width:100%;
 }
 
+abbr {
+  font-size: 0.875em;
+  letter-spacing: 0.15em;
+  margin-right: -0.15em;
+}
+
 .anchor,
 .anchor:visited {
   text-decoration: none;

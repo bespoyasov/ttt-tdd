@@ -31,8 +31,18 @@ h2 {
 }
 
 p,
-img {
+img,
+ul {
   margin:0 0 1rem 0;
+}
+
+ul li,
+ol li {
+  padding-bottom:0.4rem;
+}
+
+p + ul {
+  margin-top:-1rem
 }
 
 a {
@@ -43,6 +53,13 @@ a:visited {
 }
 a:hover {
   color: #fb3347;
+}
+
+pre {
+  margin:0;
+  padding:0.25rem 0 0 0;
+  font-size:0.8rem;
+  line-height:1.2rem;
 }
 
 .anchor,

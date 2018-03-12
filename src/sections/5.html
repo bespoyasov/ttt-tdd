@@ -1,0 +1,54 @@
+<section id='refactoring'>
+    <div class='grid'>
+      <div class='text'>
+        <h2>
+          <a href='#refactoring' class='anchor'>¶</a>
+          Рефакторинг
+        </h2>
+      </div>
+    </div>
+    <div class='grid'>
+      <div class='text'>
+        <p>Теперь, когда у нас есть тесты, мы можем приступить к рефакторингу кода.</p>
+        <p>Вынесем класс в отдельный файл, импортируем его в файл теста.</p>
+        <p>Также вынесем создание экземпляра класса в функцию, чтобы изменение конструктора затронуло только одно место.</p>
+        <p>И, возможно, нам понадобится начальное состояние игры в нескольких тестах, поэтому вынесем его в константу.</p>
+      </div>
+  
+      <div class='code'>
+        <pre>
+/* src/Game.js */
+class Game {
+  getState() {
+    return [
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ]
+  }
+}
+
+/* test/game.js */
+import Game from 'src/Game'
+
+const initialGameBoard = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
+]
+
+const createGame = () => new Game()
+
+describe('Game', () => {
+  it('Should return empty game board', () => {
+    const game = createGame()
+    
+    const board = game.getState()
+    
+    expect(board).to.deep.equal(initialGameBoard)
+  })
+})
+        </pre>
+      </div>
+    </div>
+  </section>

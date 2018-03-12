@@ -37,7 +37,9 @@ gulp.task('html', function() {
     .pipe(typograf({ 
       locale: ['ru', 'en-US'],
       enableRule: ['ru/optalign/*'],
-      disableRule: ['ru/nbsp/afterNumberSign'],
+      disableRule: [
+        'ru/nbsp/afterNumberSign',
+      ],
       rules: typografRules
     }))
     .pipe(htmlmin({collapseWhitespace: true}))

@@ -6,9 +6,13 @@
   width: 45%;
   max-width: 600px;
   min-width: 300px;
-  padding: 0 20px 10px 30px;
+  padding: 0 20px 0 30px;
   background: white;
   border-right:1px solid rgba(0,0,0,.1);
+}
+
+.code {
+  padding-bottom:1rem;
 }
 
 .grid:first-child .text {

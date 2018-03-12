@@ -1,0 +1,69 @@
+<section id='first-test'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#first-test' class='anchor'>¶</a>
+        Первый тест
+      </h2>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Вначале мы хотим разработать модуль, отвечающий за логику игры. Пусть состояние игры хранится в виде двумерного массива, в котором на месте какой-либо клетки будет находиться крестик или нолик.</p>
+      <p>Начнём с метода, который будет возвращать нам начальное состояние. Пусть начальным состоянием будет массив размером 3&times;3 с пустыми строками в клетках.</p>
+    </div>
+
+    <div class='code'>
+      <pre>
+/* test/game.js */
+  describe('Game', () => {
+    it('Should return empty game board', () => {
+      const game = new Game()
+      
+      const board = game.getState()
+      
+      expect(board).to.deep.equal([
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+      ])
+    })
+  })
+      </pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Мы ожидаем, что возвращаемое значение не будет совпадать с начальным состоянием игры, и тест упадёт.</p>
+      <p>Тест действительно упадёт, но не поэтому, а потому, что класса <i>Game</i> ещё не существует, и создание его экземпляра вызовет ошибку.</p>
+      <p>Нам нужно дополнить код, создав этот класс. Создадим его прямо в коде теста.</p>
+      <p>Теперь тест упадёт по правильной причине: <i>null <nobr>!==</nobr> начальному состоянию игры</i>.</p>
+    </div>
+    <div class='code'>
+      <pre>
+/* test/game.js */
+  describe('Game', () => {
+    it('Should return empty game board', () => {
+      const game = new Game()
+      
+      const board = game.getState()
+      
+      expect(board).to.deep.equal([
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+      ])
+    })
+  })
++  
++ class Game {
++   getState() {
++     return null
++   }
++ }
+      </pre>
+    </div>
+  </div>
+</section>

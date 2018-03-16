@@ -10,6 +10,9 @@ const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
 const importCss = require('gulp-import-css')
 
+const imagemin = require('gulp-imagemin')
+const webp = require('gulp-webp')
+
 const rename = require('gulp-rename')
 const concat = require('gulp-concat')
 const watch = require('gulp-watch')
@@ -27,8 +30,8 @@ const typografRules = [{
 }]
 
 
-gulp.task('default', ['html', 'css', 'watch'])
-gulp.task('build', ['html', 'css'])
+gulp.task('default', ['html', 'css', 'images', 'watch'])
+gulp.task('build', ['html', 'css', 'images'])
 
 gulp.task('html', function() {
   return gulp.src('./src/*.html')
@@ -53,6 +56,18 @@ gulp.task('css', function() {
       browsers: ['last 4 versions', 'ios 7']
     }) ]))
     .pipe(gulp.dest('./dist/css/'))
+})
+
+gulp.task('images', function() {
+  // minify
+  gulp.src('./src/img/**/*.{jpg,png}')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./dist/img/'))
+  
+  // convert to webp
+  gulp.src('./src/img/**/*.{jpg,png}')
+    .pipe(webp())
+    .pipe(gulp.dest('./dist/img/'))
 })
 
 gulp.task('watch', function() {

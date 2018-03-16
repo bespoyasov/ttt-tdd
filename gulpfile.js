@@ -22,6 +22,7 @@ const NON_BREAKING_HYPHEN = '‑'
 const WATCHERS = {
   html: ['./src/**/*.html'],
   styles: ['./src/**/*.css'],
+  js: ['./src/**/*.js'],
 }
 
 const typografRules = [{
@@ -30,8 +31,8 @@ const typografRules = [{
 }]
 
 
-gulp.task('default', ['html', 'css', 'images', 'watch'])
-gulp.task('build', ['html', 'css', 'images'])
+gulp.task('default', ['html', 'css', 'js', 'images', 'watch'])
+gulp.task('build', ['html', 'css', 'js', 'images'])
 
 gulp.task('html', function() {
   return gulp.src('./src/*.html')
@@ -58,6 +59,11 @@ gulp.task('css', function() {
     .pipe(gulp.dest('./dist/css/'))
 })
 
+gulp.task('js', function() {
+  gulp.src('./src/js/*.js')
+    .pipe(gulp.dest('./dist/js/'))
+})
+
 gulp.task('images', function() {
   // minify
   gulp.src('./src/img/**/*.{jpg,png}')
@@ -73,4 +79,5 @@ gulp.task('images', function() {
 gulp.task('watch', function() {
   gulp.watch(WATCHERS.html, ['html'])
   gulp.watch(WATCHERS.styles, ['css'])
+  gulp.watch(WATCHERS.js, ['js'])
 })

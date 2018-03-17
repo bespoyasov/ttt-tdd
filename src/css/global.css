@@ -56,12 +56,17 @@ a:hover {
 }
 
 pre {
-  margin:0;
+  margin:-1.2rem 0 0 0;
   padding:0.25rem 0 0 0;
   font-size:0.8rem;
   line-height:1.2rem;
   overflow-x: auto;
   width:100%;
+}
+
+code {
+  margin:0;
+  padding:0;
 }
 
 abbr {
@@ -91,4 +96,11 @@ abbr {
 
 h2:hover .anchor {
   opacity: 1;
+}
+
+:not(pre) > code[class*="language-"], 
+pre[class*="language-"] {
+  background: none;
+  margin-top:0;
+  padding-top:0;
 }

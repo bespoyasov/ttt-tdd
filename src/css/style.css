@@ -1,3 +1,5 @@
+@import url(./_prism.css);
+
 @import url(./global.css);
 @import url(./logo.css);
 @import url(./grid.css);

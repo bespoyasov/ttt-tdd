@@ -15,22 +15,20 @@
     </div>
 
     <div class='code'>
-      <pre>
-/* test/game.js */
-  describe('Game', () => {
-    it('Should return empty game board', () => {
-      const game = new Game()
-      
-      const board = game.getState()
-      
-      expect(board).to.deep.equal([
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-      ])
-    })
+      <pre><code class="line-numbers language-js">// test/game.js
+describe('Game', () => {
+  it('Should return empty game board', () => {
+    const game = new Game()
+    
+    const board = game.getState()
+    
+    expect(board).to.deep.equal([
+      ['', '', ''],
+      ['', '', ''],
+      ['', '', '']
+    ])
   })
-      </pre>
+})</code></pre>
     </div>
   </div>
 
@@ -42,28 +40,12 @@
       <p>Теперь тест упадёт по правильной причине: <i>null <nobr>!==</nobr> начальному состоянию игры</i>.</p>
     </div>
     <div class='code'>
-      <pre>
-/* test/game.js */
-  describe('Game', () => {
-    it('Should return empty game board', () => {
-      const game = new Game()
-      
-      const board = game.getState()
-      
-      expect(board).to.deep.equal([
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-      ])
-    })
-  })
-+  
+      <pre data-start="14"><code class="language-diff line-numbers">// test/game.js
 + class Game {
 +   getState() {
 +     return null
 +   }
-+ }
-      </pre>
++ }</code></pre>
     </div>
   </div>
 </section>

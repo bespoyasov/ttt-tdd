@@ -21,8 +21,7 @@
       </ul>
     </div>
     <div class='code'>
-      <pre><code class="json">
-"scripts": {
+      <pre><code class="line-numbers language-json">"scripts": {
   "test": "mocha --require babel-core/register",
   "build": "webpack"
 },
@@ -42,8 +41,7 @@
 "dependencies": {
   "babel-polyfill": "^6.26.0",
   "babel-runtime": "^6.26.0"
-}
-</code></pre>
+}</code></pre>
     </div>
   </div>
 
@@ -52,8 +50,7 @@
       <p>Создадим конфигурацию сборки и пропишем входной файл. Сборка нам понадобится ближе к концу разработки, но чтобы не отвлекаться в будущем, настроим её сейчас.</p>
     </div>
     <div class='code'>
-      <pre><code class="json">
-// webpack.config.js
+      <pre><code class="line-numbers language-js">// webpack.config.js
 var webpack = require('webpack')
 var path = require('path')
 
@@ -68,8 +65,7 @@ module.exports = [{
     filename: './js/bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-}]
-</code></pre>
+}]</code></pre>
     </div>
   </div>
 </section>

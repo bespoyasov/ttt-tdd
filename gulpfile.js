@@ -2,7 +2,7 @@ const fs = require('fs')
 const gulp = require('gulp')
 const path = require('path')
 
-const include = require('gulp-include')
+const fileinclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
 const typograf = require('gulp-typograf')
 
@@ -35,9 +35,11 @@ gulp.task('default', ['html', 'css', 'js', 'images', 'watch'])
 gulp.task('build', ['html', 'css', 'js', 'images'])
 
 gulp.task('html', function() {
-  return gulp.src('./src/*.html')
-    .pipe(include())
-      .on('error', console.log)
+  return gulp.src('./src/index.html')
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
     .pipe(typograf({ 
       locale: ['ru', 'en-US'],
       enableRule: ['ru/optalign/*'],

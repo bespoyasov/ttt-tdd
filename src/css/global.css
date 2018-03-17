@@ -102,5 +102,5 @@ h2:hover .anchor {
 pre[class*="language-"] {
   background: none;
   margin-top:0;
-  padding-top:0;
+  padding-top:0.25rem;
 }

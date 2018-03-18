@@ -15,8 +15,7 @@
     </div>
 
     <div class='code'>
-      <pre><code class="line-numbers language-js">// test/game.js
-describe('Game', () => {
+      <pre><div class='code-filename'>test/game.js</div><code class="line-numbers language-js">describe('Game', () => {
   it('Should return empty game board', () => {
     const game = new Game()
     
@@ -40,8 +39,7 @@ describe('Game', () => {
       <p>Теперь тест упадёт по правильной причине: <i>null <nobr>!==</nobr> начальному состоянию игры</i>.</p>
     </div>
     <div class='code'>
-      <pre data-start="14"><code class="language-diff line-numbers">// test/game.js
-+ class Game {
+      <pre data-start="14"><div class='code-filename'>test/game.js</div><code class="language-diff line-numbers">+ class Game {
 +   getState() {
 +     return null
 +   }

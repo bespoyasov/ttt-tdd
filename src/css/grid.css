@@ -18,6 +18,11 @@
 .code {
   width:55%;
   padding-bottom:1rem;
+  position: relative;
+}
+
+.code-filename {
+  color:rgba(0,0,0,.4);
 }
 
 .grid:first-child .text {

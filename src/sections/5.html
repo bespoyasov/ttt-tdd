@@ -16,9 +16,7 @@
       </div>
   
       <div class='code'>
-        <pre>
-/* src/Game.js */
-class Game {
+        <pre><div class='code-filename'>src/Game.js</div><code class="language-js line-numbers">class Game {
   getState() {
     return [
       ['', '', ''],
@@ -26,10 +24,8 @@ class Game {
       ['', '', '']
     ]
   }
-}
-
-/* test/game.js */
-import Game from 'src/Game'
+}</code></pre>
+<pre><div class='code-filename'>test/game.js</div><code class="language-js line-numbers">import Game from 'src/Game'
 
 const initialGameBoard = [
   ['', '', ''],
@@ -47,8 +43,7 @@ describe('Game', () => {
     
     expect(board).to.deep.equal(initialGameBoard)
   })
-})
-        </pre>
+})</code></pre>
       </div>
     </div>
   </section>

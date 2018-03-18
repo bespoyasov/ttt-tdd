@@ -21,7 +21,7 @@
       </ul>
     </div>
     <div class='code'>
-      <pre><code class="line-numbers language-json">"scripts": {
+      <pre><div class='code-filename'>package.json</div><code class="line-numbers language-json">"scripts": {
   "test": "mocha --require babel-core/register",
   "build": "webpack"
 },
@@ -30,7 +30,6 @@
   "babel-plugin-array-includes": "^2.0.3",
   "babel-plugin-transform-runtime": "^6.23.0",
   "babel-preset-es2015": "^6.24.1",
-  "babel-preset-stage-0": "^6.24.1",
   "chai": "^4.1.2",
   "jsdom": "^11.6.2",
   "mocha": "^5.0.1",
@@ -50,8 +49,7 @@
       <p>Создадим конфигурацию сборки и пропишем входной файл. Сборка нам понадобится ближе к концу разработки, но чтобы не отвлекаться в будущем, настроим её сейчас.</p>
     </div>
     <div class='code'>
-      <pre><code class="line-numbers language-js">// webpack.config.js
-var webpack = require('webpack')
+      <pre><div class='code-filename'>webpack.config.js</div><code class="line-numbers language-js">var webpack = require('webpack')
 var path = require('path')
 
 module.exports = [{

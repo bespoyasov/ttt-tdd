@@ -1,14 +1,60 @@
-<section id=''>
+<section id='refactor-again'>
   <div class='grid'>
     <div class='text'>
       <h2>
-        <a href='#' class='anchor'>¶</a>
+        <a href='#refactor-again' class='anchor'>¶</a>
+        Снова рефакторинг
       </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Первым делом вынесем <i>'&times;'</i> в константы как в тестах, так и в коде класса.</p>
+      <p>Фаза рефакторинга относится не только к продакшн-коду, который мы пишем, но и к коду тестов. С тестами придётся работать: их нужно дописывать и обновлять при изменении требований. Поэтому код тестов должен быть чистым и понятным.</p>
+      <p>Дальше обратим внимание на <i>acceptUserMove</i>: в нём <nobr><i>this._board[0][0]</i></nobr> явно относится к внутренней реализации класса. Вынесем это действие во внутренний метод <i>_updateBoard</i> и вызовем его внутри <i>acceptUserMove</i>.</p>
+      <p>Проверяем, не сломалось ли что-то по дороге. Тесты зелёные.</p>
     </div>
 
     <div class='code'>
-<pre><div class='code-filename'></div><code class='language-diff line-numbers'>
-</code></pre>
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import {expect} from 'chai'
+import Game from '../src/Game'
+
+const userMoveSymbol = '×'
+const initialGameBoard = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', '']
+]
+
+const createGame = () => new Game()
+
+
+describe('Game', () => {
+  // ...
+  
+  it('Sets user\'s symbol in top left cell', () => {
+    const game = createGame()
+    const x = 0, y = 0
+
+    game.acceptUserMove(x, y)
+    const board = game.getState()
+
+    expect(board[x][y]).to.equal(userMoveSymbol)
+  })
+})</code></pre>
+
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>export default class Game {
+  // ...
+
+  acceptUserMove(x, y) {
+    this._updateBoard(0, 0)
+  }
+
+  _updateBoard(x, y) {
+    this._board[x][y] = this._userMoveSymbol
+  }
+}</code></pre>
     </div>
   </div>
 </section>

@@ -15,7 +15,9 @@
     </div>
 
     <div class='code'>
-      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>describe('Game', () => {
+      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>import {expect} from 'chai'
+        
+describe('Game', () => {
   it('Should return empty game board', () => {
     const game = new Game()
     
@@ -39,7 +41,7 @@
       <p>Теперь тест упадёт по правильной причине: <i>null <nobr>!==</nobr> начальному состоянию игры</i>.</p>
     </div>
     <div class='code'>
-      <pre data-start='14'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ class Game {
+      <pre data-start='17'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ class Game {
 +   getState() {
 +     return null
 +   }

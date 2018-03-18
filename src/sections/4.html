@@ -14,10 +14,11 @@
       <p>Запускаем тест, видим, что он пройден. Мы оказались в зелёной зоне.</p>
       <p>На первый взгляд кажется, что мы сделали что-то бесполезное. Но мы создали первый метод <abbr>АПИ</abbr>, тесты к нему, и уже можем передать его команде.</p>
       <p>При этом перед каждым комитом мы проверяем изменения на написанных тестах, и если что-то сломалось, нам проще понять, в какой момент.</p>
+      <p>Пока что <i>getState</i> всегда возвращает начальное состояние. К этому методу мы вернёмся позже.</p>
     </div>
 
     <div class='code'>
-      <pre data-start='14'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>  class Game {
+      <pre data-start='17'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>  class Game {
     getState() {
 -     return null
 +     return [

@@ -17,7 +17,7 @@
     </div>
 
     <div class='code'>
-      <pre><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>class Game {
+      <pre><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>export default class Game {
   getState() {
     return [
       ['', '', ''],
@@ -26,7 +26,8 @@
     ]
   }
 }</code></pre>
-<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import Game from 'src/Game'
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import {expect} from 'chai'
+import Game from '../src/Game'
 
 const initialGameBoard = [
   ['', '', ''],

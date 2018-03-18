@@ -113,3 +113,10 @@ pre[class*="language-"] {
 .style .token.string {
   background: none;
 }
+
+.line-numbers .line-numbers-rows {
+  border-right-color:rgba(0,0,0,.3)
+}
+.line-numbers-rows > span:before {
+  color:rgba(0,0,0,.4)
+}

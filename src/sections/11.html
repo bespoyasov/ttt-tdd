@@ -1,0 +1,38 @@
+<section id='general-case-test'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#general-case-test' class='anchor'>¶</a>
+        Один тест вымещает другой
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Теперь посмотрим на код тестов и увидим, что третий тест включает в себя случай, описанный во втором. Поэтому второй тест можно удалить, он нам больше не понадобится.</p>
+      <p>В <abbr>ТДД</abbr> это нормальная практика. Код тестов такой же и живой, как продакшн-код, поэтому тесты будут постепенно эволюционировать и отмирать.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='23'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>- it('Sets user\'s symbol in top left cell', () => {
+-   const game = createGame()
+-   const x = 0, y = 0
+-
+-   game.acceptUserMove(x, y)
+-   const board = game.getState()
+-
+-   expect(board[x][y]).to.equal(userMoveSymbol)
+- })
+
+  it('Sets user\'s symbol in cell with given coordinates', () => {
+    const game = createGame()
+    const x = 1, y = 1
+
+    game.acceptUserMove(x, y)
+    const board = game.getState()
+
+    expect(board[x][y]).to.equal(userMoveSymbol)
+  })</code></pre>
+    </div>
+  </div>
+</section>

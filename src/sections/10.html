@@ -1,0 +1,21 @@
+<section id='improving-method'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#improving-method' class='anchor'>¶</a>
+        Расширяем метод
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Чтобы метод <i>acceptUserMove</i> прошёл тест, нам нужно использовать не нулевые координаты, а переданные аргументы. Изменение небольшое, но для нас в нём важно другое.</p>
+      <p>Если мы запустим тесты, то увидим, что все три теста пройдены. <abbr>ТДД</abbr> делает работу с уже написанным кодом безопасной, вы можете менять его и переписывать. Если что-то сломается, тесты об этом скажут.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='16'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>- this._updateBoard(0, 0)
++ this._updateBoard(x, y)</code></pre>
+    </div>
+  </div>
+</section>

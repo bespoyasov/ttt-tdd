@@ -1,0 +1,42 @@
+<section id='refactor-computer-move'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#refactor-computer-move' class='anchor'>¶</a>
+        ...и рефакторим
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Метод для обновления доски <i>_updateBoard</i> у нас уже есть, но он работает только с крестиком. Его нужно доработать, добавив ему третьим параметром объект с настройками.</p>
+      <p>Нолик, как и крестик, тоже вынесем в константу <i>_computerMoveSymbol</i>.</p>
+      <p>И как обычно проверяем, что ничего не сломалось.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='3'><div class='code-filename'></div><code class='language-diff line-numbers'>  constructor() {
+    this._userMoveSymbol = '×'
++   this._computerMoveSymbol = 'o'  
+    //...
+  }
+  
+  // ...
+
+  createComputerMove() {
+-   this._board[0][0] = 'o'
++   this._updateBoard(0, 0, {
++     symbol: this._computerMoveSymbol
++   })
+  }
+
+- _updateBoard(x, y) {
+-   this._board[x][y] = this._userMoveSymbol
+- }
++ _updateBoard(x, y, config={}) {
++   const {symbol=this._userMoveSymbol} = config
++   this._board[x][y] = symbol
++ }</code></pre>
+    </div>
+  </div>
+</section>

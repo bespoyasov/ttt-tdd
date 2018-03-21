@@ -1,0 +1,31 @@
+<section id='exception-test'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#exception-test' class='anchor'>¶</a>
+        Тестируем исключения
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Теперь продумаем ситуацию, когда пользвователь пытается занять уже занятую клетку.</p>
+      <p>Такую ситуацию можно обыграть по-разному, но мы будем в таких случаях выбрасывать исключения.</p>
+      <p>Чтобы протестировать эту ситуацию, нам нужно сделать ход в выбранную клетку, а затем сделать ход ещё раз.</p>
+      <p>При этом всю подготовку мы должны сделать именно в этом тесте. Нельзя где-то в начале создать новую игру, в первом тесте как-то её поменять, а во втором использовать эти изменения, как начальное состояние.</p>
+      <p>Каждый тест должен быть независим друг от друга. В правильно структурированном наборе тестов, ничего не сломается, если вы какой-то тест выкинете.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='33'><div class='code-filename'></div><code class='language-js line-numbers'>it('Throws an exception if user moves in taken cell', () => {
+  const game = createGame()
+  const x = 2, y = 2
+
+  game.acceptUserMove(x, y)
+  const func = game.acceptUserMove.bind(game, x, y)
+  
+  expect(func).to.throw('cell is already taken')
+})</code></pre>
+    </div>
+  </div>
+</section>

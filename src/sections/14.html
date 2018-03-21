@@ -1,0 +1,43 @@
+<section id='throw-method'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#throw-method' class='anchor'>¶</a>
+        Приводим в порядок реализацию проверки
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Проверка на занятость клетки сейчас слишком прямолинейна и сильно зависит от реализации доски. Стоит вынести проверку в отдельный внутренний метод <i>_isCellFree</i>.</p>
+      <p>При работе с ошибками нам может понадобиться использовать не стандартный конструктор <i>Error</i>, а собственную реализацию ошибок. Вынесем работу с ошибками тоже в отдельный метод <i>_throwException</i>.</p>
+      <p>После изменений снова проверяем, что тесты не падают.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='15'><div class='code-filename'></div><code class='language-diff line-numbers'>  acceptUserMove(x, y) {
+-   if (!!this._board[x][y]) {
+-     throw new Error('cell is already taken')
+-     return
+-   }
++   if (!this._isCellFree(x, y)) {
++     return this._throwException('cell is already taken')
++   }
+
+    this._updateBoard(x, y)
+  }
+
+  _updateBoard(x, y) {
+    this._board[x][y] = this._userMoveSymbol
+  }
+
++ _isCellFree(x, y) {
++   return !this._board[x][y]
++ }
++
++ _throwException(msg) {
++   throw new Error(msg)
++ }</code></pre>
+    </div>
+  </div>
+</section>

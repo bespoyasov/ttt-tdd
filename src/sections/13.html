@@ -1,0 +1,27 @@
+<section id='throw-it'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#throw-it' class='anchor'>¶</a>
+        Дорабатываем метод
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Чтобы с наименьшими затратами пройти тест, нам нужно проверить, занята ли клетка. Если она занята, то бросить исключение и закончить работу метода.</p>
+      <p>Запускаем тесты, проверяем, что ничего не сломалось. Наинчаем рефакторить.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='15'><div class='code-filename'></div><code class='language-diff line-numbers'>  acceptUserMove(x, y) {
++   if (!!this._board[x][y]) {
++     throw new Error('cell is already taken')
++     return
++   }
++
+    this._updateBoard(x, y)
+  }</code></pre>
+    </div>
+  </div>
+</section>

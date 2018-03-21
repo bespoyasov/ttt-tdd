@@ -1,0 +1,97 @@
+<section id='save-computer-move-in-history'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#save-computer-move-in-history' class='anchor'>¶</a>
+        Сохраняем ход компьютера в истории
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Теперь будем сохранять ход компьютера в истории.</p>
+      <p>Тест не будет проходить, так как история всегда возвращает одинаковое значение.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='63'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Game saves computers\'s move in history', () => { 
+  const game = createGame()
+
+  game.createComputerMove()
+  const history = game.getMoveHistory()
+
+  expect(history).to.deep.equal([{turn: 'computer', x: 0, y: 0}])
+})</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Доработаем логику игры так, чтобы при вызове хода игрока или компьтера ход автоматически записывался к историю.</p>
+      <p>Сделаем историю изначально пустой. При запуске тестов видимо, что падают два теста: последний и предыдущий. Всё правильно, так как теперь ход игрока тоже не записывается.</p> 
+      <p>Допишем обновление истории в метод <i>acceptUserMove</i>, чтобы записывать ходы игрока, и в метод <i>createComputerMove</i>, чтобы записывать ходы компьютера.</p>
+      <p>Теперь все тесты зелэные. Можно приступать к рефакторингу.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='5'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>-   this._history = [{turn: 'user', x: 1, y: 1}]
++   this._history = []
+
+  //...
+
++   this._history.push({turn: 'user', x, y})
+    this._updateBoard(x, y)
+  }
+
+  // ...
+
+  createComputerMove() {
++   this._history.push({turn: 'computer', x: 0, y: 0})
+    this._updateBoard(0, 0, {
+</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>В тестах вынесем имя компьютера в переменную.</p>
+      <p>Обновление истории через <i>push</i> слишком прямолинейно. Наша история может перестать быть массивом, тогда придётся бегать по всему классу и менять её изменение.</p>
+      <p>Вынесем его в отдельный метод <i>_updateHistory</i> и заменим все вызовы обновления на новый метод.</p>
+      <p>Имена пользователя и компьютера так же вынесем в константы.</p>
+      <p>Запускаем тесты, убеждаемся, что ничего не сломалось.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='5'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ const computerName = 'computer'
+  
+  // ...
+
+-   expect(history).to.deep.equal([{turn: 'computer', x: 0, y: 0}])
++   expect(history).to.deep.equal([{turn: computerName, x: 0, y: 0}])
+</code></pre>
+
+<pre data-start='2'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  constructor() {
++   this._userName = 'user'
++   this._computerName = 'computer'
+    this._userMoveSymbol = '×'
+
+  // ...
+
+-   this._history.push({turn: 'user', x, y})
++   this._updateHistory(this._userName, x, y)
+  }
+
+  createComputerMove() {
+-   this._history.push({turn: 'computer', x: 0, y: 0})
++   this._updateHistory(this._computerName, 0, 0)
+    this._updateBoard(0, 0, {
+
+  // ...
+  
++ _updateHistory(turn, x, y) {
++   this._history.push({turn, x, y})
++ }</code></pre>
+    </div>
+  </div>
+</section>

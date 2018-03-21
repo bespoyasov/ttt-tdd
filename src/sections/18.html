@@ -1,0 +1,34 @@
+<section id='requirements-change'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#requirements-change' class='anchor'>¶</a>
+        Вдруг изменились приоритеты
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>А теперь допустим, в разработке изменились приоритеты, и вам нужно кроме предыдщих требований написать журнал игры.</p>
+      <p>В <abbr>ТДД</abbr> с внезапными изменениями требований проблем нет. Цикл разработки короткий, поэтому больших изменений он вызвать не может. Из-за этого у вас всегда есть рабочая версия проекта, которую можно дорабатывать как угодно.</p>
+      <p>В нашем примере, нам нужно изменить вектор разработки и начать пилить историю ходов.</p>
+      <p>Начнём с метода получения истории <i>getMoveHistory</i>.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='52'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Game saves user\'s move in history', () => { 
+  const game = createGame()
+  const x = 1, y = 1
+
+  game.acceptUserMove(x, y)
+  const history = game.getMoveHistory()
+
+  expect(history).to.deep.equal([{turn: 'user', x, y}])
+})</code></pre>
+
+<pre data-start='30'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+ getMoveHistory() {
++
++ }</code></pre>
+    </div>
+  </div>
+</section>

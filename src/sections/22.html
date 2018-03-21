@@ -1,0 +1,33 @@
+<section id='intergate-moves-in-history'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#intergate-moves-in-history' class='anchor'>¶</a>
+        Проверяем, как история записывает несколько ходов
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Теперь пробуем «проиграть ситуацию», когда и пользователь, и компьютер сходили по одному разу. В истории должно оказаться две записи.</p>
+      <p>Первая запись описывает ход пользователя, вторая — компьютера. Определить это мы можем через поле <i>turn</i> в объекте записи.</p>
+      <p>Запустив тесты, мы увидим, что новый тест тоже проходит. Но это ещё не значит, мы написали всё правильно :–)</p>
+      <p>Мы помним, что компьютер пока что ходит только в левую верхнюю клетку. Поэтому по мере изменения кода к некоторым тестам мы будем возвращаться.</p>
+    </div>
+
+    <div class='code'>
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Game saves 1 user\'s move and 1 computer\'s move in history', () => { 
+  const game = createGame()
+  const x = 1, y = 1
+
+  game.acceptUserMove(x, y)
+  game.createComputerMove()
+  const history = game.getMoveHistory()
+
+  expect(history.length).to.equal(2)
+  expect(history[0].turn).to.equal(userName)
+  expect(history[1].turn).to.equal(computerName)
+})</code></pre>
+    </div>
+  </div>
+</section>

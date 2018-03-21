@@ -1,0 +1,36 @@
+<section id='refactor-history'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#refactor-history' class='anchor'>¶</a>
+        Рефакторим тесты и метод
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Имя пользователя нам понадобится в следующих тестах, поэтому вынесем его в константу.</p>
+      <p>Историю же вынесем в конструктор класса.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='4'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ const userName = 'user'
+  const userMoveSymbol = '×'
+
+  // ...
+
+-   expect(history).to.deep.equal([{turn: 'user', x, y}])
++   expect(history).to.deep.equal([{turn: userName, x, y}])</code></pre>
+
+<pre data-start='5'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+   this._history = [{turn: 'user', x: 1, y: 1}]
+    this._board = [
+
+  // ...
+
+  getMoveHistory() {
+-   return [{turn: 'user', x: 1, y: 1}]
++   return this._history
+  }</code></pre>
+    </div>
+  </div>
+</section>

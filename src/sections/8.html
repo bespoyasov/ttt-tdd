@@ -27,14 +27,13 @@ const initialGameBoard = [
   ['', '', '']
 ]
 
-const createGame = () => new Game()
-
+let game
+beforeEach(() => { game = new Game() })
 
 describe('Game', () => {
   // ...
   
   it('Sets user\'s symbol in top left cell', () => {
-    const game = createGame()
     const x = 0, y = 0
 
     game.acceptUserMove(x, y)

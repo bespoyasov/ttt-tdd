@@ -18,9 +18,8 @@
     </div>
 
     <div class='code'>
-<pre data-start='88'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer sets it\'s move in randomly chosen cell', () => { 
+<pre data-start='82'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer sets it\'s move in randomly chosen cell', () => { 
   const stub = sinon.stub(Math, 'random').returns(0.5)
-  const game = createGame()
 
   game.createComputerMove()
   const board = game.getState()
@@ -55,8 +54,6 @@
   }</code></pre>
 
 <pre data-start='47'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>- it('Computer moves in top left cell', () => { 
--   const game = createGame()
-- 
 -   game.createComputerMove()
 -   const board = game.getState()
 - 
@@ -67,7 +64,6 @@
 
   it('Game saves computers\'s move in history', () => { 
 +   const stub = sinon.stub(Math, 'random').returns(0.5)
-    const game = createGame()
 
     game.createComputerMove()
     const history = game.getMoveHistory()

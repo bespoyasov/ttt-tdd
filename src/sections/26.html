@@ -1,0 +1,90 @@
+<section id='what-about-winners'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#what-about-winners' class='anchor'>¶</a>
+        Проверяем, победил ли пользователь
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Сейчас нам осталось написать методы, которые будут проверять, есть ли в игре победитель, и кто выиграл.</p>
+      <p>Будем перебирать выигрышные комбинации, делать пользователя победителем и тестировать проверку на победителей.</p>
+      <p>Начнём с выигрыша по горизонтали и постепенно будем увеличивать количество выигрышных комбинаций. Подробно описывать каждую не будем, рассмотрим только горизонталь.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='121'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Checks if user won by horizontal', () => {
+  game.acceptUserMove(0, 0)
+  game.acceptUserMove(0, 1)
+  game.acceptUserMove(0, 2)
+  const userWon = game.isWinner(userName)
+
+  expect(userWon).to.equal(true)
+})</code></pre>
+
+<pre data-start='46'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+ isWinner(player) {
++   return false
++ }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Как аргумент мы передаём имя игрока, которого хотим проверить. В зависимости от имени будем выбирать искомый символ. Затем проверим, выполняется ли условие победы по горизонтали и вернём результат.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start=''><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>isWinner(player) {
+  const symbol = player === this._userName
+    ? this._userMoveSymbol
+    : this._computerMoveSymbol
+
+  const win = [...Array(this._fieldSize).keys()].reduce((res, i) => {
+    return this._board[i][0] === symbol 
+      && this._board[i][1] === symbol 
+      && this._board[i][2] === symbol 
+      || res
+  }, false)
+  
+  return win
+}</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Определение искомого символа по имени вынесем в метод <i>_getSymbolForPlayer</i>.</p>
+      <p>Массив заданной размерности будем создавать в константе <i>range</i>.</p>
+      <p>Метод <i>_checkCellEqual</i> будет запоминать символ, с которым мы собираемся сравнивать клетку на доске и возвращать функцию для сравнения. Эта функция будет принимать координаты клетки и сравнивать её содержимое с указанным символом.</p>
+      <p>Так как у нас будет несколько условий победы, назовём условие победы по горизонтали <i>horizontal</i>.</p>
+      <p>DSL!!!</p>
+    </div>
+
+    <div class='code'>
+<pre data-start=''><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>isWinner(player) {
+  const symbol = this._getSymbolForPlayer(player)
+  const range = [...Array(this._fieldSize).keys()]
+  const isEqual = this._checkCellEqual(symbol)
+
+  const horizontal = range.reduce((res, i) =>
+    isEqual(i, 0) && isEqual(i, 1) && isEqual(i, 2) || res, false)
+  
+  return horizontal
+}
+
+_getSymbolForPlayer(player) {
+  return player === this._userName
+    ? this._userMoveSymbol
+    : this._computerMoveSymbol
+}
+
+_checkCellEqual(symbol) {
+  return (i, j) => 
+    this._board[i][j] === symbol
+}</code></pre>
+    </div>
+  </div>
+</section>

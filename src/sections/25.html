@@ -1,0 +1,85 @@
+<section id='make-computer-throw'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#make-computer-throw' class='anchor'>¶</a>
+        Заставляем компьютер говорить об ошибке
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Мы учли ситуацию с бесконченым циклом, но просто умолчать об этой ситуации было бы плохо. Пусть компьютер выбрасывает исключение, если во время его хода не осталось ни одной свободной клетки.</p>
+      <p>Возможно, в будущем мы поменяем это поведение. Но сейчас такая ситуация кажется нестандартной, поэтому лучше обработать её как ошибку.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='112'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('If there are no free cells computer throws an exception', () => { 
+  // fill all the cells
+  for (let i = 0; i &lt; 3; ++i) {
+    for (let j = 0; j &lt; 3; ++j) {
+      game.acceptUserMove(i, j)
+    }
+  }
+
+  const func = game.createComputerMove.bind(game)
+  expect(func).to.throw('no cells available')
+})</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Здесь нам пригодится метод <i>_throwException</i>, который мы определяли ранее.</p>
+      <p>Нам лишь нужно дописать условие, которое определяет отсутствие пустых клеток, добавив туда передачу ошибок.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='30'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  createComputerMove() {
+-   if (this._getFreeCellsCount() === 0) return false
++   if (this._getFreeCellsCount() === 0) {
++     return this._throwException('no cells available')
++   }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>В новом тесте есть повторяющийся кусок с наполнение доски крестиками. Мы изменим функцию <i>fillCells</i>, добавив конфиг с координатой клетки, которую надо оставить пустой. Если конфиг не будет передан, то будем считать, что надо заполнить все клетки.</p>
+      <p>Не забываем обновить тест, который уже использовал <i>fillCells</i>. Добавляем ему конфиг с координатами клетки, которую надо было оставить пустой.</p>
+      <p>В новом тесте нам нужно заполнить все клетки, поэтому вызываем функцию без конфига.</p>
+      <p>После изменений проверяем, не покраснели ли тесты. Всё хорошо, идём дальше.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start=''><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>- const fillCells = game => {
++ const fillCells = (game, config={}) => {
++   const { x=-1, y=-1 } = config
+
+  // ...
+
+    for (let j = 0; j &lt; 3; j++) {
+-     if (i !== 2 || j !== 2) game.acceptUserMove(i, j)
++     if (i !== x || j !== y) game.acceptUserMove(i, j)
+    }
+  
+  // ...
+
+  it('Computer moves in cell that is not taken', () => { 
+-   fillCells(game)
++   fillCells(game, {x: 2, y: 2})
+
+  // ...
+
+  it('If there are no free cells computer throws an exception', () => { 
+-   // fill all the cells
+-   for (let i = 0; i &lt; 3; ++i) {
+-     for (let j = 0; j &lt; 3; ++j) {
+-       game.acceptUserMove(i, j)
+-     }
+-   }
++   fillCells(game)</code></pre>
+    </div>
+  </div>
+</section>

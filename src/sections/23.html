@@ -18,7 +18,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='82'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer sets it\'s move in randomly chosen cell', () => { 
+<pre data-start='82'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer moves in randomly chosen cell', () => { 
   const stub = sinon.stub(Math, 'random').returns(0.5)
 
   game.createComputerMove()

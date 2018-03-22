@@ -1,0 +1,149 @@
+<section id='force-computer-to-move-in-last-cell'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#force-computer-to-move-in-last-cell' class='anchor'>¶</a>
+        Заставляем компьютер пойти в последнюю клетку
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Так как мы хотим, чтобы компьютер ходил случайно, нам надо проверить, чтобы он не могу пойти в уже занятую клетку.</p>
+      <p>Для этого напишем тест, который вынудит компьтер занять заранее определённую клетку.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='84'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer moves in cell that is not taken', () => { 
+  // fill all the cells with user's symbol except last
+  for (let i = 0; i &lt; 3; i++) {
+    for (let j = 0; j &lt; 3; j++) {
+      if (i !== 2 || j !== 2) game.acceptUserMove(i, j)
+    }
+  }
+
+  game.createComputerMove()
+  const board = game.getState()
+
+  const userCount = board.reduce((result, row) => {
+    return row.reduce((count, el) => {
+      return el === userMoveSymbol ? ++count : count
+    }, result)
+  }, 0)
+
+  const computerCount = board.reduce((result, row) => {
+    return row.reduce((count, el) => {
+      return el === computerMoveSymbol ? ++count : count
+    }, result)
+  }, 0)
+
+  expect(userCount).to.equal(8)
+  expect(computerCount).to.equal(1)
+  expect(board[2][2]).to.equal(computerMoveSymbol)
+})</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Чтобы компьютер точно занял только свободную клетку, нам нужно отсеивать все занятые.</p>
+      <p>Так как ходы компьютера случайны, будем использовать цикл <i>while</i>, чтобы рано или поздно найти свободную клетку.</p>
+      <p>Чтобы цикл не стал бесконечным, проверим, есть ли свободные клетки вообще.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='30'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  createComputerMove() {
+-   const x = this._getRandomCoordinate()
+-   const y = this._getRandomCoordinate()
++   const freeCells = this._board.reduce((total, row) =>
++     row.reduce((count, el) =>
++       el === '' ? ++count : count, total), 0)
++
++   if (!freeCells) return
++
++   let x = this._getRandomCoordinate()
++   let y = this._getRandomCoordinate()
++
++   while (!!this._board[x][y]) {
++     x = this._getRandomCoordinate()
++     y = this._getRandomCoordinate()
++   }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Рефакторить придётся много. В тестах повторяется подсчёт крестиков и ноликов на доске. Стоит вынести эти действия в функцию.</p>
+      <p>Наполнение доски крестиками тоже вынесем в функцию, чтобы сделать код теста читаемее.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='19'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>const fillCells = game => {
+  for (let i = 0; i &lt; 3; i++) {
+    for (let j = 0; j &lt; 3; j++) {
+      if (i !== 2 || j !== 2) game.acceptUserMove(i, j)
+    }
+  }
+}
+
+const count = (arr, symbol) => 
+  arr.reduce((result, row) => {
+    return row.reduce((count, el) => {
+      return el === symbol ? ++count : count
+    }, result)
+  }, 0)
+
+// ...
+
+  it('Computer moves in cell that is not taken', () => { 
+    fillCells(game)
+
+    game.createComputerMove()
+    const board = game.getState()
+
+    expect(count(board, userMoveSymbol)).to.equal(8)
+    expect(count(board, computerMoveSymbol)).to.equal(1)
+    expect(board[2][2]).to.equal(computerMoveSymbol)
+  })</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Подсчёт количества пустых клеток и получение случайных координат вынесем в отдельные методы. Они могут нам пригодиться дальше.</p>
+    </div>
+
+    <div class='code'>
+  <pre data-start='30'><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>  createComputerMove() {
+    if (this._getFreeCellsCount() === 0) return false
+    const [x, y] = this._getFreeRandomCoordinates()
+    
+    this._updateHistory(this._computerName, x, y)
+    this._updateBoard(x, y, {
+      symbol: this._computerMoveSymbol
+    })
+  }
+
+// ...
+
+  _getFreeRandomCoordinates() {
+    let x = this._getRandomCoordinate()
+    let y = this._getRandomCoordinate()
+
+    while (!!this._board[x][y]) {
+      x = this._getRandomCoordinate()
+      y = this._getRandomCoordinate()
+    }
+
+    return [x, y]
+  }
+
+  _getFreeCellsCount() {
+    return this._board.reduce((total, row) =>
+      row.reduce((count, el) =>
+        el === '' ? ++count : count, total), 0)
+  }</code></pre>
+    </div>
+  </div>
+</section>

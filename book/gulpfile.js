@@ -31,8 +31,8 @@ const typografRules = [{
 }]
 
 
-gulp.task('default', ['html', 'css', 'js', 'images', 'watch'])
-gulp.task('build', ['html', 'css', 'js', 'images'])
+gulp.task('default', ['html', 'css', 'js', 'images', 'favicons', 'watch'])
+gulp.task('build', ['html', 'css', 'js', 'images', 'favicons'])
 
 gulp.task('html', function() {
   return gulp.src('./src/index.html')
@@ -76,6 +76,11 @@ gulp.task('images', function() {
   gulp.src('./src/img/**/*.{jpg,png}')
     .pipe(webp())
     .pipe(gulp.dest('./dist/img/'))
+})
+
+gulp.task('favicons', function() {
+  gulp.src('./src/favicons/**/*')
+    .pipe(gulp.dest('./dist/favicons/'))
 })
 
 gulp.task('watch', function() {

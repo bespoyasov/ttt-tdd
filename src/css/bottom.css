@@ -4,9 +4,12 @@
   padding: 4rem 0 0 0;
 }
 
-.author,
+.author {
+  width:40%;
+}
+
 .likely {
-  width:50%;
+  width:60%;
 }
 
 .likely {

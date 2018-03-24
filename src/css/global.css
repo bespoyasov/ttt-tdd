@@ -120,3 +120,7 @@ pre[class*="language-"] {
 .line-numbers-rows > span:before {
   color:rgba(0,0,0,.4)
 }
+
+.author {
+  padding: 3rem 0 0 0;
+}

@@ -1,0 +1,112 @@
+<section id='winner-congratulations'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#winner-congratulations' class='anchor'>¶</a>
+        Покажем поздравление победителю
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Если пользователь или компьютер побеждает в игре, покажем, что он выиграл.</p>
+      <p>Нам нужно сымитировать ситуацию, когда пользователь находится в шаге от победы и ходит в выигрышную клетку.</p>
+      <p>Создадим игру, в которую передадим указанную доску. Для этого подправим класс <i>Game</i> так, чтобы конструктор принимал параметр <i>board</i>. Если он указан, то будет использоваться, как начальное состояние.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='116'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Creates status text below table is someone wins', () => {
+  const game = createGame([
+    ['×', '×', ''], 
+    ['', '', ''], 
+    ['', '', '']
+  ])
+
+  const domController = createInstance(game)
+
+  domController.init()
+  document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
+
+  const status = document.querySelector('#status')
+  expect(status.textContent).to.equal('user won!')
+})</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Если пользователь или компьютер побеждает в игре, покажем, что он выиграл.</p>
+      <p>Нам нужно сымитировать ситуацию, когда пользователь находится в шаге от победы и ходит в выигрышную клетку.</p>
+      <p>Создадим игру, в которую передадим указанную доску. Для этого подправим класс <i>Game</i> так, чтобы конструктор принимал параметр <i>board</i>. Если он указан, то будет использоваться, как начальное состояние.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='33'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  this._makeUserMove(row, col)
+      
++ const state = this.game.checkGame()
++ if (state !== 'continue') {
++   const node = document.createElement('div')
++   const txt = document.createTextNode(state)
++   node.id = 'status'
++   node.appendChild(txt)
++   this.rootNode.appendChild(node)
++ }
+
+  this._makeComputerMove()</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Вынесем создание элемента в метод <i>_createNode</i>, а проверку состояния игры — в метод <i>_checkContinue</i>.</p>
+      <p>После хода пользователя или компьютера будем проверять, продолжается ли игра в методе <i>_checkContinue</i>. Если нет, то создаём поздраление победителю в методе <i>_createNode</i> и добавляем его в корневую ноду.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='33'><div class='code-filename'>src/DomController.js</div><code class='language-js line-numbers'>  _handleCellClick(row, col) {
+    this.lastClickedIndecies = [row, col]
+
+    try {
+      this._makeUserMove(row, col)
+      const continues = this._checkContinue()
+      if (!continues) return
+      
+      this._makeComputerMove()
+      this._checkContinue()
+    }
+    catch(e) {
+      window.alert(e.message)
+    }
+  }
+
+  // ...
+
+  _checkContinue() {
+    const state = this.game.checkGame()
+    
+    if (state !== 'continue') {
+      const status = this._createNode('div', {
+        text: state,
+        id: 'status'
+      })
+
+      this.rootNode.appendChild(status)
+      return false
+    }
+    
+    return true
+  }
+
+  _createNode(tag, config={}) {
+    const {text, id} = config
+    const node = document.createElement(tag)
+    const txt = document.createTextNode(text)
+    node.appendChild(txt)
+
+    if (!!id) node.id = id
+    return node
+  }</code></pre>
+    </div>
+  </div>
+</section>

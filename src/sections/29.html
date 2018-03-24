@@ -1,0 +1,64 @@
+<section id='create-table'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#create-table' class='anchor'>¶</a>
+        Создаём пустую таблицу
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>В конструкторе привяжем класс к переданной ноде и сохраним в <i>rootNode</i>. Всю работу ограничим внутри неё.</p>
+      <p>Внутри <i>createTable</i> создадим пустую таблицу и добавим её внутрь <i>rootNode</i>.</p>
+      <p>Проверим, что тест проходит и начнём рефакторить.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='23'><div class='code-filename'>test/dom.js</div><code class='language-diff line-numbers'>  class DomController {
+    constructor(root) {
++     this.rootNode = document.querySelector(root)
+    }
+    
+    createTable() {
++     const child = document.createElement('table')
++     this.rootNode.appendChild(child)
+    }
+  }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Вынесем класс <i>DomController</i> в отдельный файл.</p>
+      <p>Добавим импорт в файл тестов и вынесем создание экземпляра <i>DomController</i> в функцию <i>createInstance</i>.</p>
+    </div>
+
+    <div class='code'>
+<pre><div class='code-filename'>src/DomController.js</div><code class='language-js line-numbers'>class DomController {
+  constructor(root) {
+    this.rootNode = document.querySelector(root)
+  }
+  
+  createTable() {
+    const child = document.createElement('table')
+    this.rootNode.appendChild(child)
+  }
+}
+
+export default DomController</code></pre>
+
+<pre data-start='4'><div class='code-filename'>test/dom.js</div><code class='language-diff line-numbers'>+ const createInstance = () => new DomController('#root')
+
+  describe('DOM controller', () => {
+    it('Creates empty table', () => {
+-     const domController = new DomController('#root')
++     const domController = createInstance()
+  
+      domController.createTable()
+      expect(document.querySelectorAll('table').length).to.equal(1)
+    })
+  })</code></pre></div>
+  </div>
+</section>

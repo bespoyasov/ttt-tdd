@@ -1,0 +1,78 @@
+<section id='dsl'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#dsl' class='anchor'>¶</a>
+        <abbr>ДСЛ</abbr>
+      </h2>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>В коде теста не первый взгляд всё хорошо. Мы объявляем, в какие клетки проставитькрстик, чтобы потом проверить, победил ли пользователь.</p>
+      <p>Но попробуем посмотреть «взглядом новичка» на <i>game.acceptUserMove(0, 0)</i>. Если я ничего не знаю о внутреннем устройстве класса, то сообразить, что делает эта строка, трудно.</p>
+      <p>Это становится проблемой, когда мы переводим требования с языка бизнеса на язык программирования. Ведь работать с тестами может не только команда разработки, но и аналитики, кьюэйщики да и кто угодно ещё.</p>
+      <p>В этом тесте мы хотим проверить, что если на доске строчка заполнена крестиками, то пользователь победил. Было бы круто прямо так и написать. Это называется <a href='https://ru.wikipedia.org/wiki/DSL'><abbr>ДСЛ</abbr></a>.</p>
+      <p>На самом деле мы можем так написать свой тест. Для этого нам потребуется что-то, что будет переводить метод <i>setBoardState</i> в понятные методы для класса <i>Game</i>.</p>
+      <p>Для таких целей можно использовать <a href='http://www.dofactory.com/javascript/builder-design-pattern'>паттерн строитель (builder)</a>. Класс <i>GameBuilder</i> возьмёт на себя логику создания игры с нужной нам доской.</p>
+      <p>Ключевая особенность классов-строителей в том, что в каждом методе <i>with-</i> они возвращают <i>this</i>. Таким образом при их использовании мы можем совмещать методы в цепочки, чтобы настраивать нужный нам объет.</p>
+      <p>После настройки останется лишь вызвать метод <i>build</i>, чтобы строитель вернул нам созданный объект.</p>
+      <p>Теперь писать тесты на проверку победы удобнее и нагляднее.</p>
+    </div>
+
+    <div class='code'>
+<pre><div class='code-filename'>// pseudocode</div><code class='language-js line-numbers'>somegame.setBoardState(`
+  x x x
+  . . .
+  . . .
+`)</code></pre>
+
+<pre><div class='code-filename'>// test/GameBuilder.js</div><code class='language-js line-numbers'>import Game from '../src/Game'
+
+class GameBuilder {
+  constructor() {
+    this.game = new Game()
+  }
+
+  withBoardState(state) {
+    state = state
+      .split('\n')
+      .filter(item => !!item.trim())
+      .map(item => item.trim().split(' '))
+
+    state.forEach((item, i) => {
+      item.forEach((symbol, j) => {
+        if (symbol === 'x') this.game.acceptUserMove(i, j)
+      })
+    })
+    
+    // will allow us to chain methods
+    return this
+  }
+
+  build() {
+    return this.game
+  }
+}
+
+export default GameBuilder</code></pre>
+
+<pre><div class='code-filename'>// test.game.js</div><code class='language-js line-numbers'>import GameBuilder from './GameBuilder'
+
+// ...
+
+it('Checks if user won by horizontal', () => {
+  const game = new GameBuilder()
+    .withBoardState(`
+      x x x
+      . . .
+      . . .`)
+    .build()
+
+  const userWon = game.isWinner(userName)
+  expect(userWon).to.equal(true)
+})</code></pre>
+    </div>
+  </div>
+</section>

@@ -105,6 +105,21 @@ pre[class*="language-"] {
   padding-top:0.25rem;
 }
 
+.bottom {
+  display:flex;
+  padding: 4rem 0 0 0;
+}
+
+.author,
+.likely {
+  width:50%;
+}
+
+.likely {
+  text-align: right;
+  padding: 0.1rem
+}
+
 .token.operator, 
 .token.entity, 
 .token.url, 
@@ -119,8 +134,4 @@ pre[class*="language-"] {
 }
 .line-numbers-rows > span:before {
   color:rgba(0,0,0,.4)
-}
-
-.author {
-  padding: 3rem 0 0 0;
 }

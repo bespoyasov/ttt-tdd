@@ -23,6 +23,10 @@ export default class Game {
     return this._fieldSize
   }
 
+  getMoveHistory() {
+    return this._history
+  }
+
   clear() {
     this._history = []
     this._board = [
@@ -53,10 +57,6 @@ export default class Game {
     })
   }
 
-  getMoveHistory() {
-    return this._history
-  }
-
   isWinner(player) {
     const symbol = this._getSymbolForPlayer(player)
     const range = [...Array(this._fieldSize).keys()]
@@ -84,6 +84,7 @@ export default class Game {
     return 'continue'
   }
 
+
   _updateBoard(x, y, config={}) {
     const {symbol=this._userMoveSymbol} = config
     this._board[x][y] = symbol
@@ -93,12 +94,18 @@ export default class Game {
     this._history.push({turn, x, y})
   }
 
+  _throwException(msg) {
+    throw new Error(msg)
+  }
+
   _isCellFree(x, y) {
     return !this._board[x][y]
   }
 
-  _throwException(msg) {
-    throw new Error(msg)
+  _getFreeCellsCount() {
+    return this._board.reduce((total, row) =>
+      row.reduce((count, el) =>
+        el === '' ? ++count : count, total), 0)
   }
 
   _getRandomCoordinate() {
@@ -115,12 +122,6 @@ export default class Game {
     }
 
     return [x, y]
-  }
-
-  _getFreeCellsCount() {
-    return this._board.reduce((total, row) =>
-      row.reduce((count, el) =>
-        el === '' ? ++count : count, total), 0)
   }
 
   _getSymbolForPlayer(player) {

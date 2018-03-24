@@ -4,6 +4,11 @@ class DomController {
     this.rootNode = document.querySelector(root)
     this.lastClickedIndecies = [-1, -1]
   }
+
+  init() {
+    const size = this.game.getSize()
+    this.createTable(size, size)
+  }
   
   createTable(rows=0, cols=0) {
     const child = document.createElement('table')
@@ -21,24 +26,19 @@ class DomController {
     }
   }
 
-  init() {
-    const size = this.game.getSize()
-    this.createTable(size, size)
-  }
-
   clear() {
     this.game.clear()
     this.rootNode.innerHTML = ''
     this.init()
   }
 
+
   _handleCellClick(row, col) {
     this.lastClickedIndecies = [row, col]
 
     try {
       this._makeUserMove(row, col)
-      const continues = this._checkContinue()
-      if (!continues) return
+      if (!this._checkContinue()) return
       
       this._makeComputerMove()
       this._checkContinue()

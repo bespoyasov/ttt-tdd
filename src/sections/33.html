@@ -1,0 +1,42 @@
+<section id='test-alert'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#test-alert' class='anchor'>¶</a>
+        Проверяем ошибки
+      </h2>
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='text'>
+      <p>Я пропущу создание и тестирование метода <i>init</i> у контроллера. Этот метод запрашивает у модели игры размер доски и строит таблицу по нему. Исходный код и тесты этого метода и сопутствующих ему, можно посмотреть на гитхабе.</p>
+      <p>Сейчас перейдём к проверке ситуации, когда пользователь кликнул на занятую клетку. Пусть в этотм момент будет выскакивать <i>alert</i> с сообщением, что клетка уже занята.</p>
+      <p>Проверить, вызван ли <i>alert</i> можно так же с помощью шпиона.</p>
+      <p>Так как мы использовали <i>try-catch</i> ошибка, полученная от <i>acceptUserMove</i> вызвала <i>alert</i> внутри <i>_handleCellClick</i> класса <i>DomController</i>. Тест автоматически пройден.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='24'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>const createGame = (board) => new Game(board)
+
+// ...
+
+beforeEach(() => {
+  window.alert = sinon.spy()
+  window.confirm = sinon.spy()
+})
+
+// ...
+
+  it('Gets an alert when user makes move in taken cell', () => {
+    const game = createGame()
+    const domController = createInstance(game)
+
+    domController.init()
+    document.querySelector('table td').click()
+    document.querySelector('table td').click()
+
+    expect(window.alert.called).to.be.true
+  })</code></pre>
+    </div>
+  </div>
+</section>

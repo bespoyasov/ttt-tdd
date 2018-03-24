@@ -1,0 +1,62 @@
+<section id='redraw-table'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#redraw-table' class='anchor'>¶</a>
+        Перерисовываем таблицу
+      </h2>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Мы научились передавать модели событие клика. Теперь нужно научиться отображать изменения в таблице.</p>
+      <p>После обновления модели будем спрашивать у неё новое состояние и перерисовывать таблицу.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='94'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'> it('Redraws table on cell click', () => {
+    const game = createGame()
+    const domController = createInstance(game)
+
+    domController.init()
+    document.querySelector('table td').click()
+    const text = document.querySelector('table td').textContent
+
+    expect(text).to.be.equal('×')
+  })</code></pre>
+
+<pre data-start='40'><div class='code-filename'>scr/DomController.js</div><code class='language-diff line-numbers'>  _makeUserMove(row, col) {
+    this.game.acceptUserMove(row, col)
+
++   const board = this.game.getState()
++   const table = this.rootNode.querySelector('table')
++
++   board.forEach((row, i) => {
++     row.forEach((col, j) => {
++       table
++         .querySelector(`tr:nth-child(${i+1}) td:nth-child(${j+1})`)
++         .innerHTML = col
++     })
++   })
+  }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Так как перерисовка таблицы может нам понадобиться и в других ситуациях, вынесем её в метод <i>_redraw</i>.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='40'><div class='code-filename'>scr/DomController.js</div><code class='language-diff line-numbers'>  _makeUserMove(row, col) {
+    this.game.acceptUserMove(row, col)
++   this._redraw()
++ }
++
++ _redraw() {
+    const board = this.game.getState()
+    const table = this.rootNode.querySelector('table')</code></pre>
+    </div>
+  </div>
+</section>

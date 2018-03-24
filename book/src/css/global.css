@@ -62,6 +62,7 @@ pre {
   line-height:1.2rem;
   overflow-x: auto;
   width:100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 code {
@@ -90,7 +91,8 @@ abbr {
 }
 
 .anchor:hover,
-.anchor:visited:hover {
+.anchor:visited:hover,
+.disclaimer a:hover {
   color: #fb3347;
 }
 
@@ -103,6 +105,11 @@ pre[class*="language-"] {
   background: none;
   margin-top:0;
   padding-top:0.25rem;
+}
+
+.disclaimer,
+.disclaimer a {
+  color: rgba(0,0,0,.3);
 }
 
 .token.operator, 

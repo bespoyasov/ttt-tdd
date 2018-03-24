@@ -1,7 +1,7 @@
 # TTT-TDD
-Пример разработки «Крестиков-ноликов» по ТДД
+Пример разработки «Крестиков-ноликов» по ТДД.
 
 Содержание:
-- Книга;
-- Игра;
-- Исходники.
+- [Книга](https://bespoyasov.ru/ttt-tdd/)
+- [Игра](https://bespoyasov.ru/ttt-tdd/game/)
+- [Исходники](https://github.com/bespoyasov/ttt-tdd/tree/master/game)

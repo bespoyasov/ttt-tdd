@@ -1,0 +1,28 @@
+.bottom {
+  display:flex;
+  flex-wrap: wrap;
+  padding: 4rem 0 0 0;
+}
+
+.author,
+.likely {
+  width:50%;
+}
+
+.likely {
+  text-align: right;
+  padding: 0.1rem
+}
+
+
+@media (max-width:1000px) {
+  .author,
+  .likely {
+    width:100%;
+  }
+
+  .likely {
+    padding-top:0.5rem;
+    text-align: left;
+  }
+}

@@ -1,5 +1,6 @@
 .grid {
   display:flex;
+  flex-wrap: wrap;
 }
 
 .text {
@@ -30,4 +31,37 @@
 }
 .grid:last-child .text {
   padding-bottom: 20px;
+}
+
+
+@media (max-width: 1000px) {
+  .text,
+  .code {
+    width:50%;
+  }
+}
+
+@media (max-width: 800px) {
+  .text,
+  .code {
+    width:100%;
+    max-width:100%;
+    border-right:0;
+  }
+
+  .code {
+    border:1px solid rgba(0,0,0,.1);
+    border-left:0;
+    border-right:0;
+    padding-top: 1rem;
+    padding-bottom:2rem;
+  }
+
+  .text {
+    padding: 0 20px;
+  }
+
+  .grid + .grid .text {
+    padding-top:1rem;
+  }
 }

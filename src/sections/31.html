@@ -1,0 +1,61 @@
+<section id='handle-click'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#handle-click' class='anchor'>¶</a>
+        Обрабатываем клик
+      </h2>
+    </div>
+  </div>
+  
+  <div class='grid'>
+    <div class='text'>
+      <p>Мы хотим, чтобы при клике на клетку там появлялся крестик. Это объёмная задача, поэтому сперва нам нужно научиться обрабатывать клики по клетке.</p>
+      <p>Как нам проверить, что пользователь кликнул на первую клетку, а контроллер правильно это обработал? Так как мы разрабатываем сперва тест, мы можем использовать специальные поля специально для проверки.</p>
+      <p>В нашем случае у контроллера будет поле <i>lastClickedIndecies</i>, которое будет меняться при клике на клетку. В это поле мы будем записывать адрес последней кетки, по которой кликнул пользователь.</p>
+      <p>В тесте нам останется лишь сравнить значение с ожидаемым.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='40'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Remembers indecies of last clicked cell', () => {
+  const domController = createInstance()
+
+  domController.createTable(3, 3)
+  document.querySelector('table td').click()
+
+  expect(domController.lastClickedIndecies).to.deep.equal([0, 0])
+})</code></pre>
+
+<pre data-start='15'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>      for (let j = 0; j &lt; cols; j++) {
+        const cell = row.insertCell(j)
++       cell.addEventListener('click', () => {
++         this.lastClickedIndecies = [i, j]
++       })
+      }</code></pre>
+    </div>
+  </div>
+
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Вынесем обработку клика в отдельный метод <i>_handleCLick</i>. </p>
+      <p>Проверяем, что после рефакторинга тесты не сломались.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='15'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>      for (let j = 0; j &lt; cols; j++) {
+        const cell = row.insertCell(j)
+-       cell.addEventListener('click', () => {
+-         this.lastClickedIndecies = [i, j]
+-       })
++       cell.addEventListener('click', this._handleCellClick.bind(this, i, j))
+      }
+    }
+  }
++
++ _handleCellClick(row, col) {
++   this.lastClickedIndecies = [row, col]
++ }</code></pre>
+    </div>
+  </div>
+</section>

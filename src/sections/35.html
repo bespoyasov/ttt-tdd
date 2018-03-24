@@ -1,0 +1,68 @@
+<section id='call-computer'>
+  <div class='grid'>
+    <div class='text'>
+      <h2>
+        <a href='#call-computer' class='anchor'>¶</a>
+        Привязываем ход компьютера
+      </h2>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Пусть компьютер ходит сразу после хода пользователя.</p>
+      <p>Даже если хочется, чтобы компьютер «подумал» перед ходом, нам следует двигаться небольшими шагами и разбивать задачи на подзадачи. Не забываем, что цикл разработки в <abbr>ТДД</abbr> — 10–15 минут.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='105'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>  it('Makes computer move right after users move', () => {
+    const game = createGame()
+    const domController = createInstance(game)
+
+    domController.init()
+    document.querySelector('table td').click()
+    const text = document.querySelector('table').textContent
+
+    expect(text.indexOf('o') > -1).to.be.true
+  })</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Обновим метод <i>_handleCellClick</i> и добавим в него запуск хода компьютера.</p>
+      <p>Запускаем тесты, чтобы убедиться, что всё работает.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='32'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  try {
+    this._makeUserMove(row, col)
++
++   this.game.createComputerMove()
++   this._redraw()
+  }</code></pre>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='text'>
+      <p>Вынесем его так же в отдельный метод <i>_makeComputerMove</i> и будем вызывать его.</p>
+      <p>После рефакторинга снова запускаем тесты.</p>
+    </div>
+
+    <div class='code'>
+<pre data-start='32'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  try {
+    this._makeUserMove(row, col)
+-
+-   this.game.createComputerMove()
+-   this._redraw()
++   this._makeComputerMove()
+  }
+
++ _makeComputerMove() {
++   this.game.createComputerTurn()
++   this._redraw()
++ }</code></pre>
+    </div>
+  </div>
+</section>

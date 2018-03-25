@@ -1,5 +1,6 @@
 class DomController {
   constructor({root, game}) {
+    this.active = true
     this.game = game
     this.rootNode = document.querySelector(root)
     this.lastClickedIndecies = [-1, -1]
@@ -29,6 +30,7 @@ class DomController {
   clear() {
     this.game.clear()
     this.rootNode.innerHTML = ''
+    this.active = true
     this.init()
   }
 
@@ -75,6 +77,8 @@ class DomController {
     const state = this.game.checkGame()
     
     if (state !== 'continue') {
+      if (!this.active) return false
+      
       const status = this._createNode('div', {
         text: state,
         id: 'status'
@@ -87,6 +91,7 @@ class DomController {
       clearButton.addEventListener('click', this.clear.bind(this))
       this.rootNode.appendChild(status)
       this.rootNode.appendChild(clearButton)
+      this.active = false
       return false
     }
     

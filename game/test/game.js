@@ -42,7 +42,7 @@ describe('Game', () => {
     expect(board).to.deep.equal(initialGameBoard)
   })
 
-  it('Sets user\'s symbol in cell with given coordinates', () => {
+  it('Writes user\'s symbol in cell with given coordinates', () => {
     const x = 1, y = 1
   
     game.acceptUserMove(x, y)

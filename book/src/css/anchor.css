@@ -1,0 +1,29 @@
+.anchor,
+.anchor:visited {
+  text-decoration: none;
+  color:black;
+  font-size: 1rem;
+  position: absolute;
+  left:-1rem;
+  width:1rem;
+  display:block;
+  top:0.9em;
+  line-height:1em;
+  opacity: 0;
+}
+
+.anchor:hover,
+.anchor:visited:hover,
+.disclaimer a:hover {
+  color: #fb3347;
+}
+
+h2:hover .anchor {
+  opacity: 1;
+}
+
+@media (max-width: 800px) {
+  .anchor {
+    opacity: 1;
+  }
+}

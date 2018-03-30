@@ -2,6 +2,7 @@
 @import url(./_likely.css);
 
 @import url(./global.css);
+@import url(./anchor.css);
 @import url(./logo.css);
 @import url(./grid.css);
 

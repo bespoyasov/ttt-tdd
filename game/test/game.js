@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep'
 import sinon from 'sinon'
 import {expect} from 'chai'
 import Game from '../src/Game'

@@ -15,7 +15,7 @@
 
     <div class='code'>
 <pre data-start='15'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  acceptUserMove(x, y) {
-+   if (!!this._board[x][y]) {
++   if (this._board[x][y]) {
 +     throw new Error('cell is already taken')
 +     return
 +   }

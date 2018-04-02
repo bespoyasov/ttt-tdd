@@ -1,18 +1,26 @@
+import cloneDeep from 'lodash/cloneDeep'
+
+import {
+  userName,
+  computerName,
+  userMoveSymbol,
+  computerMoveSymbol,
+  initialGameBoard,
+} from './const'
+
+
 export default class Game {
   constructor(board) {
-    this._userName = 'user'
-    this._computerName = 'computer'
+    this._userName = userName
+    this._computerName = computerName
 
-    this._userMoveSymbol = '×'
-    this._computerMoveSymbol = 'o'
+    this._userMoveSymbol = userMoveSymbol
+    this._computerMoveSymbol = computerMoveSymbol
     
     this._fieldSize = 3
     this._history = []
-    this._board = board || [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
-    ]
+
+    this._board = board || cloneDeep(initialGameBoard)
   }
 
   getState() {
@@ -29,11 +37,7 @@ export default class Game {
 
   clear() {
     this._history = []
-    this._board = [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', '']
-    ]
+    this._board = cloneDeep(initialGameBoard)
   }
 
   acceptUserMove(x, y) {

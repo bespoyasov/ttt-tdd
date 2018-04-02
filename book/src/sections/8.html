@@ -43,7 +43,12 @@ describe('Game', () => {
   })
 })</code></pre>
 
-<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>export default class Game {
+<pre><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>export default class Game {
+  constructor() {
+    this._userMoveSymbol = '×'
+    // ...
+  }
+
   // ...
 
   acceptUserMove(x, y) {

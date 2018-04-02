@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "lodash": "^4.17.5"
   }
 }

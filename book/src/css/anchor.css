@@ -4,11 +4,11 @@
   color:black;
   font-size: 1rem;
   position: absolute;
-  left:-1rem;
-  width:1rem;
-  display:block;
-  top:0.9em;
-  line-height:1em;
+  left: -1.5rem;
+  width:1.5rem;
+  display: block;
+  top: 0.65em;
+  line-height: 1.5em;
   opacity: 0;
 }
 
@@ -23,7 +23,12 @@ h2:hover .anchor {
 }
 
 @media (max-width: 800px) {
-  .anchor {
+  .anchor, 
+  .anchor:visited {
     opacity: 1;
+    line-height: inherit;
+    position: static;
+    display: inline-block;
+    vertical-align: baseline;
   }
 }

@@ -104,3 +104,11 @@ pre[class*="language-"] {
 .line-numbers-rows > span:before {
   color:rgba(0,0,0,.4)
 }
+
+
+@media (max-width: 800px) {
+  h2 {
+    margin-bottom:0;
+    font-size:1.8rem;
+  }
+}

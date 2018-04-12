@@ -105,6 +105,10 @@ pre[class*="language-"] {
   color:rgba(0,0,0,.4)
 }
 
+.likely__counter {
+  display: none !important;
+}
+
 
 @media (max-width: 800px) {
   h2 {

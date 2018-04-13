@@ -76,6 +76,16 @@ abbr {
   margin-right: -0.15em;
 }
 
+figcaption {
+  font-style: italic;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0 1rem 0 0;
+  margin: -1rem 0 1rem 0;
+  color: rgba(0, 0, 0, .3);
+  max-width:475px;
+}
+
 
 :not(pre) > code[class*="language-"], 
 pre[class*="language-"] {

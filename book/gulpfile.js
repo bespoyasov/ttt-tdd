@@ -64,6 +64,9 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   gulp.src('./src/js/*.js')
     .pipe(gulp.dest('./dist/js/'))
+
+  gulp.src('./src/sw.js')
+    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('images', function() {

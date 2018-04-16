@@ -12,23 +12,23 @@
     <div class='text'>
       <p>Мы хотим, чтобы при клике на клетку там появлялся крестик. Это объёмная задача, поэтому сперва нам нужно научиться просто отлавливать клики по клетке.</p>
       <p>Как нам проверить, что пользователь кликнул на первую клетку, а контроллер правильно это обработал? Так как мы разрабатываем сперва тест, мы можем использовать особые поля специально для проверки.</p>
-      <p>В нашем случае у контроллера будет поле <i>lastClickedIndecies</i>, которое будет меняться при клике на клетку. В это поле мы будем записывать адрес последней кетки, по которой кликнул пользователь. В тесте останется сравнить значение с ожидаемым.</p>
+      <p>В нашем случае у контроллера будет поле <i>lastClickedIndices</i>, которое будет меняться при клике на клетку. В это поле мы будем записывать адрес последней клетки, по которой кликнул пользователь. В тесте останется сравнить значение с ожидаемым.</p>
     </div>
 
     <div class='code'>
-<pre data-start='40'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Remembers indecies of last clicked cell', () => {
+<pre data-start='40'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Remembers indices of last clicked cell', () => {
   const domController = createInstance()
 
   domController.createTable(3, 3)
   document.querySelector('table td').click()
 
-  expect(domController.lastClickedIndecies).to.deep.equal([0, 0])
+  expect(domController.lastClickedIndices).to.deep.equal([0, 0])
 })</code></pre>
 
 <pre data-start='15'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>      for (let j = 0; j &lt; cols; j++) {
         const cell = row.insertCell(j)
 +       cell.addEventListener('click', () => {
-+         this.lastClickedIndecies = [i, j]
++         this.lastClickedIndices = [i, j]
 +       })
       }</code></pre>
     </div>
@@ -45,7 +45,7 @@
 <pre data-start='15'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>      for (let j = 0; j &lt; cols; j++) {
         const cell = row.insertCell(j)
 -       cell.addEventListener('click', () => {
--         this.lastClickedIndecies = [i, j]
+-         this.lastClickedIndices = [i, j]
 -       })
 +       cell.addEventListener('click', this._handleCellClick.bind(this, i, j))
       }
@@ -53,7 +53,7 @@
   }
 +
 + _handleCellClick(row, col) {
-+   this.lastClickedIndecies = [row, col]
++   this.lastClickedIndices = [row, col]
 + }</code></pre>
     </div>
   </div>

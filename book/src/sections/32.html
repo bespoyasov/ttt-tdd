@@ -46,14 +46,14 @@ const createInstance = (game={}) => {
 +   constructor({root, game}) {
 +     this.game = game
       this.rootNode = document.querySelector(root)
-      this.lastClickedIndecies = [-1, -1]
+      this.lastClickedIndices = [-1, -1]
     }
   } 
 
   // ...
 
   _handleCellClick(row, col) {
-    this.lastClickedIndecies = [row, col]
+    this.lastClickedIndices = [row, col]
 +   this.game.acceptUserMove(row, col)
   }</code></pre>
     </div>
@@ -67,7 +67,7 @@ const createInstance = (game={}) => {
 
     <div class='code'>
 <pre data-start='24'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  _handleCellClick(row, col) {
-    this.lastClickedIndecies = [row, col]
+    this.lastClickedIndices = [row, col]
 -   this.game.acceptUserMove(row, col)
 
 +   try {

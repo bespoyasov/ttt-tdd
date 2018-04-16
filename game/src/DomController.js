@@ -3,7 +3,7 @@ class DomController {
     this.active = true
     this.game = game
     this.rootNode = document.querySelector(root)
-    this.lastClickedIndecies = [-1, -1]
+    this.lastClickedIndices = [-1, -1]
   }
 
   init() {
@@ -36,7 +36,7 @@ class DomController {
 
 
   _handleCellClick(row, col) {
-    this.lastClickedIndecies = [row, col]
+    this.lastClickedIndices = [row, col]
 
     try {
       this._makeUserMove(row, col)

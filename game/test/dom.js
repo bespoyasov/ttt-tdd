@@ -50,13 +50,13 @@ describe('DOM controller', () => {
     expect(document.querySelectorAll('td').length).to.equal(9)
   })
 
-  it('Remembers indecies of last clicked cell', () => {
+  it('Remembers indices of last clicked cell', () => {
     const domController = createInstance()
 
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.lastClickedIndecies).to.deep.equal([0, 0])
+    expect(domController.lastClickedIndices).to.deep.equal([0, 0])
   })
 
   it('Makes user move in game on cell click', () => {

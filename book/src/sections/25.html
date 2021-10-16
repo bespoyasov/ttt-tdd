@@ -7,15 +7,15 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
-      <p>Мы учли ситуацию с бесконeчным циклом, но просто умолчать о ней было бы плохо. Пусть компьютер выбрасывает исключение, если во время его хода не осталось ни одной свободной клетки.</p>
+      <p>Мы учли ситуацию с бесконечным циклом, но просто умолчать о ней было бы плохо. Пусть компьютер выбрасывает исключение, если во время его хода не осталось ни одной свободной клетки.</p>
       <p>Возможно, в будущем мы поменяем это поведение. Но сейчас такая ситуация кажется нестандартной, поэтому лучше обработать её как ошибку.</p>
     </div>
 
     <div class='code'>
-<pre data-start='112'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('If there are no free cells computer throws an exception', () => { 
+<pre data-start='112'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('If there are no free cells computer throws an exception', () => {
   // fill all the cells
   for (let i = 0; i &lt; 3; ++i) {
     for (let j = 0; j &lt; 3; ++j) {
@@ -63,16 +63,16 @@
 -     if (i !== 2 || j !== 2) game.acceptUserMove(i, j)
 +     if (i !== x || j !== y) game.acceptUserMove(i, j)
     }
-  
+
   // ...
 
-  it('Computer moves in cell that is not taken', () => { 
+  it('Computer moves in cell that is not taken', () => {
 -   fillCells(game)
 +   fillCells(game, {x: 2, y: 2})
 
   // ...
 
-  it('If there are no free cells computer throws an exception', () => { 
+  it('If there are no free cells computer throws an exception', () => {
 -   // fill all the cells
 -   for (let i = 0; i &lt; 3; ++i) {
 -     for (let j = 0; j &lt; 3; ++j) {

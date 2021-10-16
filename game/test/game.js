@@ -25,7 +25,7 @@ const fillCells = (game, config={}) => {
   }
 }
 
-const count = (arr, symbol) => 
+const count = (arr, symbol) =>
   arr.reduce((result, row) => {
     return row.reduce((count, el) => {
       return el === symbol ? ++count : count
@@ -36,16 +36,16 @@ const count = (arr, symbol) =>
 describe('Game', () => {
   it('Should return empty game board', () => {
     const board = game.getState()
-    
+
     expect(board).to.deep.equal(initialGameBoard)
   })
 
   it('Writes user\'s symbol in cell with given coordinates', () => {
     const x = 1, y = 1
-  
+
     game.acceptUserMove(x, y)
     const board = game.getState()
-  
+
     expect(board[x][y]).to.equal(userMoveSymbol)
   })
 
@@ -54,11 +54,11 @@ describe('Game', () => {
 
     game.acceptUserMove(x, y)
     const func = game.acceptUserMove.bind(game, x, y)
-    
+
     expect(func).to.throw('cell is already taken')
   })
 
-  it('Game saves user\'s move in history', () => { 
+  it('Game saves user\'s move in history', () => {
     const x = 1, y = 1
 
     game.acceptUserMove(x, y)
@@ -67,7 +67,7 @@ describe('Game', () => {
     expect(history).to.deep.equal([{turn: 'user', x, y}])
   })
 
-  it('Game saves computers\'s move in history', () => { 
+  it('Game saves computer\'s move in history', () => {
     const stub = sinon.stub(Math, 'random').returns(0.5)
 
     game.createComputerMove()
@@ -77,7 +77,7 @@ describe('Game', () => {
     stub.restore()
   })
 
-  it('Game saves 1 user\'s move and 1 computer\'s move in history', () => { 
+  it('Game saves 1 user\'s move and 1 computer\'s move in history', () => {
     const x = 1, y = 1
 
     game.acceptUserMove(x, y)
@@ -89,7 +89,7 @@ describe('Game', () => {
     expect(history[1].turn).to.equal(computerName)
   })
 
-  it('Computer moves in randomly chosen cell', () => { 
+  it('Computer moves in randomly chosen cell', () => {
     const stub = sinon.stub(Math, 'random').returns(0.5)
 
     game.createComputerMove()
@@ -99,7 +99,7 @@ describe('Game', () => {
     stub.restore()
   })
 
-  it('Computer moves in cell that is not taken', () => { 
+  it('Computer moves in cell that is not taken', () => {
     fillCells(game, {x: 2, y: 2})
 
     game.createComputerMove()
@@ -110,7 +110,7 @@ describe('Game', () => {
     expect(board[2][2]).to.equal(computerMoveSymbol)
   })
 
-  it('If there are no free cells computer throws an exception', () => { 
+  it('If there are no free cells computer throws an exception', () => {
     fillCells(game)
 
     const func = game.createComputerMove.bind(game)
@@ -191,7 +191,7 @@ describe('Game', () => {
 
   it('Returns game board size', () => {
     const size = game.getSize()
-    
+
     expect(size).to.deep.equal(3)
   })
 })

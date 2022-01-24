@@ -15,7 +15,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='84'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer moves in cell that is not taken', () => { 
+<pre data-start='84'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in cell that is not taken', () => { 
   // fill all the cells with user's symbol except last
   for (let i = 0; i &lt; 3; i++) {
     for (let j = 0; j &lt; 3; j++) {
@@ -38,9 +38,9 @@
     }, result)
   }, 0)
 
-  expect(userCount).to.equal(8)
-  expect(computerCount).to.equal(1)
-  expect(board[2][2]).to.equal(computerMoveSymbol)
+  expect(userCount).toBe(8)
+  expect(computerCount).toBe(1)
+  expect(board[2][2]).toEqual(computerMoveSymbol)
 })</code></pre>
     </div>
   </div>
@@ -96,15 +96,15 @@ const count = (arr, symbol) =>
 
 // ...
 
-  it('Computer moves in cell that is not taken', () => { 
+  test('Computer moves in cell that is not taken', () => { 
     fillCells(game)
 
     game.createComputerMove()
     const board = game.getState()
 
-    expect(count(board, userMoveSymbol)).to.equal(8)
-    expect(count(board, computerMoveSymbol)).to.equal(1)
-    expect(board[2][2]).to.equal(computerMoveSymbol)
+    expect(count(board, userMoveSymbol)).toBe(8)
+    expect(count(board, computerMoveSymbol)).toBE(1)
+    expect(board[2][2]).toEqual(computerMoveSymbol)
   })</code></pre>
     </div>
   </div>

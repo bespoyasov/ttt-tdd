@@ -15,11 +15,11 @@
     </div>
 
     <div class='code'>
-<pre data-start='63'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Game saves computers\'s move in history', () => { 
+<pre data-start='63'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Game saves computers\'s move in history', () => { 
   game.createComputerMove()
   const history = game.getMoveHistory()
 
-  expect(history).to.deep.equal([{turn: 'computer', x: 0, y: 0}])
+  expect(history).toEqual([{turn: 'computer', x: 0, y: 0}])
 })</code></pre>
     </div>
   </div>
@@ -65,8 +65,8 @@
   
   // ...
 
--   expect(history).to.deep.equal([{turn: 'computer', x: 0, y: 0}])
-+   expect(history).to.deep.equal([{turn: computerName, x: 0, y: 0}])
+-   expect(history).toEqual([{turn: 'computer', x: 0, y: 0}])
++   expect(history).toEqual([{turn: computerName, x: 0, y: 0}])
 </code></pre>
 
 <pre data-start='2'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  constructor() {

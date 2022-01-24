@@ -12,47 +12,30 @@
     <div class='text'>
       <p>Для разработки игры мы будем использовать:</p>
       <ul>
-        <li><a href='https://mochajs.org/'>Mocha</a> для запуска тестов;</li>
-        <li><a href='https://chaijs.com/'>Chai</a> для проверки условий;</li>
+        <li><a href='https://jestjs.io/'>Jest</a> для написания тестов;</li>
         <li><a href='https://sinonjs.org/'>Sinon</a> для проверки запуска функций и методов;</li>
         <li><a href='https://github.com/jsdom/jsdom'><abbr>JSDOM</abbr></a> для проверки функций, работающих с <abbr>DOM</abbr>;</li>
-        <li><a href='https://babeljs.io/'>Babel</a> для работы с <abbr>ES6</abbr>;</li>
         <li><a href='https://webpack.js.org/'>Webpack</a> для сборки проекта.</li>
       </ul>
     </div>
     <div class='code'>
       <pre><div class='code-filename'>package.json</div><code class="line-numbers language-json">{
   "scripts": {
-    "test": "mocha --require babel-core/register",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "build": "webpack"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-array-includes": "^2.0.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chai": "^4.1.2",
-    "jsdom": "^11.6.2",
-    "mocha": "^5.0.1",
-    "sinon": "^4.4.2",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10"
+    "jest": "^27.4.7",
+    "jsdom": "^11.12.0",
+    "sinon": "^4.5.0",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0"
+    "lodash": "^4.17.21"
   }
+}
 }</code></pre>
-<pre><div class='code-filename'>.babelrc</div><code class="line-numbers language-json">{
-  "presets": ["es2015"],
-  "plugins": [
-    "array-includes",
-    ["transform-runtime", {"polyfill": true}]
-  ]
-}</code></pre>
-    </div>
-  </div>
 
   <div class='grid'>
     <div class='text'>
@@ -67,7 +50,7 @@ module.exports = [{
   mode: 'production',
   context: path.resolve(__dirname),
   entry: {
-    javascript: ['babel-polyfill', './src/index.js']
+    javascript: ['./src/index.js']
   },
   output: {
     filename: './js/bundle.js',

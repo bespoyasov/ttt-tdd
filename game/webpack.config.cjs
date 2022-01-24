@@ -6,7 +6,7 @@ module.exports = [{
   mode: 'production',
   context: path.resolve(__dirname),
   entry: {
-    javascript: ['babel-polyfill', './src/index.js']
+    javascript: ['./src/index.js']
   },
   output: {
     filename: './js/bundle.js',

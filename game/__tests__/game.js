@@ -1,7 +1,7 @@
+import { describe, test, expect, beforeEach } from '@jest/globals';
 import sinon from 'sinon'
-import {expect} from 'chai'
-import Game from '../src/Game'
-import GameBuilder from './GameBuilder'
+import Game from '../src/Game.js'
+import GameBuilder from '../src/GameBuilder.js'
 
 import {
   userName,
@@ -32,92 +32,91 @@ const count = (arr, symbol) =>
     }, result)
   }, 0)
 
-
 describe('Game', () => {
-  it('Should return empty game board', () => {
+  test('Should return empty game board', () => {
     const board = game.getState()
 
-    expect(board).to.deep.equal(initialGameBoard)
+    expect(board).toEqual(initialGameBoard)
   })
 
-  it('Writes user\'s symbol in cell with given coordinates', () => {
+  test('Writes user\'s symbol in cell with given coordinates', () => {
     const x = 1, y = 1
 
     game.acceptUserMove(x, y)
     const board = game.getState()
 
-    expect(board[x][y]).to.equal(userMoveSymbol)
+    expect(board[x][y]).toEqual(userMoveSymbol)
   })
 
-  it('Throws an exception if user moves in taken cell', () => {
+  test('Throws an exception if user moves in taken cell', () => {
     const x = 2, y = 2
 
     game.acceptUserMove(x, y)
     const func = game.acceptUserMove.bind(game, x, y)
 
-    expect(func).to.throw('cell is already taken')
+    expect(func).toThrow('cell is already taken')
   })
 
-  it('Game saves user\'s move in history', () => {
+  test('Game saves user\'s move in history', () => {
     const x = 1, y = 1
 
     game.acceptUserMove(x, y)
     const history = game.getMoveHistory()
 
-    expect(history).to.deep.equal([{turn: 'user', x, y}])
+    expect(history).toEqual([{turn: 'user', x, y}])
   })
 
-  it('Game saves computer\'s move in history', () => {
+  test('Game saves computer\'s move in history', () => {
     const stub = sinon.stub(Math, 'random').returns(0.5)
 
     game.createComputerMove()
     const history = game.getMoveHistory()
 
-    expect(history).to.deep.equal([{turn: computerName, x: 1, y: 1}])
+    expect(history).toEqual([{turn: computerName, x: 1, y: 1}])
     stub.restore()
   })
 
-  it('Game saves 1 user\'s move and 1 computer\'s move in history', () => {
+  test('Game saves 1 user\'s move and 1 computer\'s move in history', () => {
     const x = 1, y = 1
 
     game.acceptUserMove(x, y)
     game.createComputerMove()
     const history = game.getMoveHistory()
 
-    expect(history.length).to.equal(2)
-    expect(history[0].turn).to.equal(userName)
-    expect(history[1].turn).to.equal(computerName)
+    expect(history.length).toEqual(2)
+    expect(history[0].turn).toEqual(userName)
+    expect(history[1].turn).toEqual(computerName)
   })
 
-  it('Computer moves in randomly chosen cell', () => {
+  test('Computer moves in randomly chosen cell', () => {
     const stub = sinon.stub(Math, 'random').returns(0.5)
 
     game.createComputerMove()
     const board = game.getState()
 
-    expect(board[1][1]).to.equal(computerMoveSymbol)
+    expect(board[1][1]).toEqual(computerMoveSymbol)
     stub.restore()
   })
 
-  it('Computer moves in cell that is not taken', () => {
+  test('Computer moves in cell that is not taken', () => {
     fillCells(game, {x: 2, y: 2})
 
     game.createComputerMove()
     const board = game.getState()
 
-    expect(count(board, userMoveSymbol)).to.equal(8)
-    expect(count(board, computerMoveSymbol)).to.equal(1)
-    expect(board[2][2]).to.equal(computerMoveSymbol)
+    expect(count(board, userMoveSymbol)).toBe(8)
+    expect(count(board, computerMoveSymbol)).toBe(1)
+    expect(board[2][2]).toEqual(computerMoveSymbol)
   })
 
-  it('If there are no free cells computer throws an exception', () => {
+  test('If there are no free cells computer throws an exception', () => {
     fillCells(game)
 
     const func = game.createComputerMove.bind(game)
-    expect(func).to.throw('no cells available')
+    expect(func).toThrow('no cells available')
   })
 
-  it('Checks if user won by horizontal', () => {
+  test('Checks if user won by horizontal', () => {
     const game = new GameBuilder()
       .withBoardState(`
         x x x
@@ -126,10 +125,10 @@ describe('Game', () => {
       .build()
 
     const userWon = game.isWinner(userName)
-    expect(userWon).to.equal(true)
+    expect(userWon).toEqual(true)
   })
 
-  it('Checks if user has won by vertical', () => {
+  test('Checks if user has won by vertical', () => {
     const game = new GameBuilder()
       .withBoardState(`
         x . .
@@ -138,10 +137,10 @@ describe('Game', () => {
       .build()
 
     const userWon = game.isWinner(userName)
-    expect(userWon).to.equal(true)
+    expect(userWon).toEqual(true)
   })
 
-  it('Checks if user has won by main diagonal', () => {
+  test('Checks if user has won by main diagonal', () => {
     const game = new GameBuilder()
       .withBoardState(`
         x . .
@@ -150,10 +149,10 @@ describe('Game', () => {
       .build()
 
     const userWon = game.isWinner(userName)
-    expect(userWon).to.equal(true)
+    expect(userWon).toEqual(true)
   })
 
-  it('Checks if user has won by secondary diagonal', () => {
+  test('Checks if user has won by secondary diagonal', () => {
     const game = new GameBuilder()
       .withBoardState(`
         . . x
@@ -162,10 +161,10 @@ describe('Game', () => {
       .build()
 
     const userWon = game.isWinner(userName)
-    expect(userWon).to.equal(true)
+    expect(userWon).toEqual(true)
   })
 
-  it('Checks if there is winner', () => {
+  test('Checks if there is winner', () => {
     const game = new GameBuilder()
       .withBoardState(`
         x x x
@@ -174,10 +173,10 @@ describe('Game', () => {
       .build()
 
     const state = game.checkGame()
-    expect(state).to.equal(`${userName} won!`)
+    expect(state).toEqual(`${userName} won!`)
   })
 
-  it('Checks if there are no winners', () => {
+  test('Checks if there are no winners', () => {
     const game = new GameBuilder()
       .withBoardState(`
         . x x
@@ -186,12 +185,12 @@ describe('Game', () => {
       .build()
 
     const state = game.checkGame()
-    expect(state).to.equal(`continue`)
+    expect(state).toEqual(`continue`)
   })
 
-  it('Returns game board size', () => {
+  test('Returns game board size', () => {
     const size = game.getSize()
 
-    expect(size).to.deep.equal(3)
+    expect(size).toBe(3)
   })
 })

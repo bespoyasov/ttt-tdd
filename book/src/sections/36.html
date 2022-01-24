@@ -16,7 +16,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='116'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Creates status text below table if someone wins', () => {
+<pre data-start='116'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>test('Creates status text below table if someone wins', () => {
   const game = createGame([
     ['×', '×', ''], 
     ['', '', ''], 
@@ -29,7 +29,7 @@
   document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
 
   const status = document.querySelector('#status')
-  expect(status.textContent).to.equal('user won!')
+  expect(status.textContent).toEqual('user won!')
 })</code></pre>
 
 <pre data-start='33'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  this._makeUserMove(row, col)

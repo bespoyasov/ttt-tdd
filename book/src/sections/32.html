@@ -38,7 +38,7 @@ const createInstance = (game={}) => {
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.game.acceptUserMove.called).to.be.true
+    expect(domController.game.acceptUserMove.called).toBeTruthly()
   })</code></pre>
 
 <pre><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  class DomController {

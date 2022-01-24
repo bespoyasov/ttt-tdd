@@ -1,9 +1,9 @@
-import {expect} from 'chai'
+import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
 import jsdom from 'jsdom'
 import sinon from 'sinon'
 
-import Game from '../src/Game'
-import DomController from '../src/DomController'
+import Game from '../src/Game.js'
+import DomController from '../src/DomController.js'
 
 const {JSDOM} = jsdom
 const dom = new JSDOM('<html><body id="root"></body></html>')
@@ -30,57 +30,56 @@ afterEach(() => {
   document.body.innerHTML = ''
 })
 
-
-describe('DOM controller', () => {
-  it('Creates empty table', () => {
+describe('JS dom', () => {
+  test('Creates empty table', () => {
     const domController = createInstance()
 
     domController.createTable()
 
-    expect(document.querySelectorAll('table').length).to.equal(1)
+    expect(document.querySelectorAll('table').length).toBe(1)
   })
 
-  it('Creates table with 3 rows and 3 columns', () => {
+  test('Creates table with 3 rows and 3 columns', () => {
     const domController = createInstance()
 
     domController.createTable(3, 3)
 
-    expect(document.querySelectorAll('table').length).to.equal(1)
-    expect(document.querySelectorAll('tr').length).to.equal(3)
-    expect(document.querySelectorAll('td').length).to.equal(9)
+    expect(document.querySelectorAll('table').length).toBe(1)
+    expect(document.querySelectorAll('tr').length).toBe(3)
+    expect(document.querySelectorAll('td').length).toBe(9)
   })
 
-  it('Remembers indices of last clicked cell', () => {
+  test('Remembers indices of last clicked cell', () => {
     const domController = createInstance()
 
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.lastClickedIndices).to.deep.equal([0, 0])
+    expect(domController.lastClickedIndices).toEqual([0, 0])
   })
 
-  it('Makes user move in game on cell click', () => {
+  test('Makes user move in game on cell click', () => {
     const gameMock = { acceptUserMove: sinon.spy() }
     const domController = createInstance(gameMock)
 
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.game.acceptUserMove.called).to.be.true
+    expect(domController.game.acceptUserMove.called).toBeTruthy()
   })
 
-  it('Checks initialization of table by game state', () => {
+  test('Checks initialization of table by game state', () => {
     const game = createGame()
     const domController = createInstance(game)
 
     domController.init()
 
-    expect(document.querySelectorAll('table').length).to.equal(1)
-    expect(document.querySelectorAll('tr').length).to.equal(3)
-    expect(document.querySelectorAll('td').length).to.equal(9)
+    expect(document.querySelectorAll('table').length).toBe(1)
+    expect(document.querySelectorAll('tr').length).toBe(3)
+    expect(document.querySelectorAll('td').length).toBe(9)
   })
 
-  it('Gets an alert when user makes move in taken cell', () => {
+  test('Gets an alert when user makes move in taken cell', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -88,10 +87,10 @@ describe('DOM controller', () => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).to.be.true
+    expect(window.alert.called).toBeTruthy()
   })
 
-  it('Redraws table on cell click', () => {
+  test('Redraws table on cell click', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -99,10 +98,10 @@ describe('DOM controller', () => {
     document.querySelector('table td').click()
     const text = document.querySelector('table td').textContent
 
-    expect(text).to.be.equal('×')
+    expect(text).toEqual('×')
   })
 
-  it('Makes computer move right after users move', () => {
+  test('Makes computer move right after users move', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -110,10 +109,10 @@ describe('DOM controller', () => {
     document.querySelector('table td').click()
     const text = document.querySelector('table').textContent
 
-    expect(text.indexOf('o') > -1).to.be.true
+    expect(text.indexOf('o') > -1).toBeTruthy()
   })
 
-  it('Creates status text below table is someone wins', () => {
+  test('Creates status text below table is someone wins', () => {
     const game = createGame([
       ['×', '×', ''], 
       ['', '', ''], 
@@ -126,10 +125,10 @@ describe('DOM controller', () => {
     document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
 
     const status = document.querySelector('#status')
-    expect(status.textContent).to.equal('user won!')
+    expect(status.textContent).toEqual('user won!')
   })
 
-  it('Creates clear button if someone wins', () => {
+  test('Creates clear button if someone wins', () => {
     const game = createGame([
       ['×', '×', ''], 
       ['', '', ''], 
@@ -142,11 +141,11 @@ describe('DOM controller', () => {
     document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
 
     const button = document.querySelectorAll('button')
-    expect(button.length).to.equal(1)
+    expect(button.length).toBe(1)
   })
 
 
-  it('Clears table on button click', () => {
+  test('Clears table on button click', () => {
     const game = createGame([
       ['×', '×', ''], 
       ['', '', ''], 
@@ -159,7 +158,7 @@ describe('DOM controller', () => {
     document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
     document.querySelector('button').click()
 
-    expect(document.querySelector('table').textContent).to.equal('')
-    expect(document.querySelectorAll('button').length).to.equal(0)
+    expect(document.querySelector('table').textContent).toEqual('')
+    expect(document.querySelectorAll('button').length).toBe(0)
   })
 })

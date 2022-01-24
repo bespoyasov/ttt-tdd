@@ -17,10 +17,9 @@
     </div>
 
     <div class='code'>
-<pre><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>import {expect} from 'chai'
-import jsdom from 'jsdom'
+<pre><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>import jsdom from 'jsdom'
 
-import Game from '../src/Game'
+import Game from '../src/Game.js'
 
 const {JSDOM} = jsdom
 const dom = new JSDOM('&lt;html>&lt;body id="root">&lt;/body>&lt;/html>')
@@ -30,12 +29,12 @@ global.document = dom.window.document
 
 
 describe('DOM controller', () => {
-  it('Creates empty table', () => {
+  test('Creates empty table', () => {
     const domController = new DomController('#root')
 
     domController.createTable()
 
-    expect(document.querySelectorAll('table').length).to.equal(1)
+    expect(document.querySelectorAll('table').length).toBe(1)
   })
 })
 

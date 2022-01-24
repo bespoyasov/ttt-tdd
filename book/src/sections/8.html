@@ -17,8 +17,8 @@
     </div>
 
     <div class='code'>
-<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import {expect} from 'chai'
-import Game from '../src/Game'
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>
+import Game from '../src/Game.js'
 
 const userMoveSymbol = '×'
 const initialGameBoard = [
@@ -33,13 +33,13 @@ beforeEach(() => { game = new Game() })
 describe('Game', () => {
   // ...
   
-  it('Writes user\'s symbol in top left cell', () => {
+  test('Writes user\'s symbol in top left cell', () => {
     const x = 0, y = 0
 
     game.acceptUserMove(x, y)
     const board = game.getState()
 
-    expect(board[x][y]).to.equal(userMoveSymbol)
+    expect(board[x][y]).toEqual(userMoveSymbol)
   })
 })</code></pre>
 

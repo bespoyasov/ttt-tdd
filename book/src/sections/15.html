@@ -16,11 +16,11 @@
     </div>
 
     <div class='code'>
-<pre data-start='41'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Computer moves in top left cell', () => { 
+<pre data-start='41'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in top left cell', () => { 
   game.createComputerMove()
   const board = game.getState()
 
-  expect(board[0][0]).to.equal('o')
+  expect(board[0][0]).toEqual('o')
 })</code></pre>
 <pre data-start='23'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+ createComputerMove() {
 +

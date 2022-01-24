@@ -28,9 +28,9 @@ it('Creates table with 3 rows and 3 columns', () => {
 
   domController.createTable(3, 3)
 
-  expect(document.querySelectorAll('table').length).to.equal(1)
-  expect(document.querySelectorAll('tr').length).to.equal(3)
-  expect(document.querySelectorAll('td').length).to.equal(9)
+  expect(document.querySelectorAll('table').length).toBe(1)
+  expect(document.querySelectorAll('tr').length).toBe(3)
+  expect(document.querySelectorAll('td').length).toBe(9)
 })</code></pre>
     </div>
   </div>

@@ -14,13 +14,13 @@
     </div>
 
     <div class='code'>
-<pre data-start='32'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Writes user\'s symbol in cell with given coordinates', () => {
+<pre data-start='32'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Writes user\'s symbol in cell with given coordinates', () => {
   const x = 1, y = 1
 
   game.acceptUserMove(x, y)
   const board = game.getState()
 
-  expect(board[x][y]).to.equal(userMoveSymbol)
+  expect(board[x][y]).toEqual(userMoveSymbol)
 })</code></pre>
     </div>
   </div>

@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import {
   userName,
   computerName,
@@ -20,7 +18,7 @@ export default class Game {
     this._fieldSize = 3
     this._history = []
 
-    this._board = board || _.cloneDeep(initialGameBoard)
+    this._board = board || JSON.parse(JSON.stringify(initialGameBoard))
   }
 
   getState() {
@@ -37,7 +35,7 @@ export default class Game {
 
   clear() {
     this._history = []
-    this._board = _.cloneDeep(initialGameBoard)
+    this._board = JSON.parse(JSON.stringify(initialGameBoard))
   }
 
   acceptUserMove(x, y) {

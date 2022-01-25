@@ -2,8 +2,8 @@ import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
 import jsdom from 'jsdom'
 import sinon from 'sinon'
 
-import Game from '../src/Game.js'
-import DomController from '../src/DomController.js'
+import Game from '../src/Game'
+import DomController from '../src/DomController'
 
 const {JSDOM} = jsdom
 const dom = new JSDOM('<html><body id="root"></body></html>')
@@ -65,7 +65,7 @@ describe('JS dom', () => {
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.game.acceptUserMove.called).toBeTruthy()
+    expect(domController.game.acceptUserMove.called).toBe(true)
   })
 
   test('Checks initialization of table by game state', () => {
@@ -87,7 +87,7 @@ describe('JS dom', () => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).toBeTruthy()
+    expect(window.alert.called).toBe(true)
   })
 
   test('Redraws table on cell click', () => {
@@ -109,7 +109,7 @@ describe('JS dom', () => {
     document.querySelector('table td').click()
     const text = document.querySelector('table').textContent
 
-    expect(text.indexOf('o') > -1).toBeTruthy()
+    expect(text.indexOf('o') > -1).toBe(true)
   })
 
   test('Creates status text below table is someone wins', () => {

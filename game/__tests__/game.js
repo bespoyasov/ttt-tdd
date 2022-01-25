@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from '@jest/globals';
 import sinon from 'sinon'
-import Game from '../src/Game.js'
-import GameBuilder from '../src/GameBuilder.js'
+import Game from '../src/Game'
+import GameBuilder from '../src/GameBuilder'
 
 import {
   userName,

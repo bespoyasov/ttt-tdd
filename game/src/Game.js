@@ -6,8 +6,6 @@ import {
   initialGameBoard,
 } from './const.js'
 
-const deepClone = (coll) => JSON.parse(JSON.stringify(coll))
-
 export default class Game {
   constructor(board) {
     this._userName = userName
@@ -19,7 +17,7 @@ export default class Game {
     this._fieldSize = 3
     this._history = []
 
-    this._board = board || deepClone(initialGameBoard)
+    this._board = board || this._deepClone(initialGameBoard)
   }
 
   getState() {
@@ -36,7 +34,7 @@ export default class Game {
 
   clear() {
     this._history = []
-    this._board = deepClone(initialGameBoard)
+    this._board = this._deepClone(initialGameBoard)
   }
 
   acceptUserMove(x, y) {
@@ -87,6 +85,10 @@ export default class Game {
     return 'continue'
   }
 
+
+  _deepClone(coll) {
+    return JSON.parse(JSON.stringify(coll))
+  }
 
   _updateBoard(x, y, config={}) {
     const {symbol=this._userMoveSymbol} = config

@@ -17,7 +17,7 @@ export default class Game {
     this._fieldSize = 3
     this._history = []
 
-    this._board = board || this._deepClone(initialGameBoard)
+    this._board = board || this._cloneBoardState(initialGameBoard)
   }
 
   getState() {
@@ -34,7 +34,7 @@ export default class Game {
 
   clear() {
     this._history = []
-    this._board = this._deepClone(initialGameBoard)
+    this._board = this._cloneBoardState(initialGameBoard)
   }
 
   acceptUserMove(x, y) {
@@ -86,8 +86,8 @@ export default class Game {
   }
 
 
-  _deepClone(coll) {
-    return JSON.parse(JSON.stringify(coll))
+  _cloneBoardState(board) {
+    return JSON.parse(JSON.stringify(board))
   }
 
   _updateBoard(x, y, config={}) {

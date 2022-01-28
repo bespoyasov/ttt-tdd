@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>Так как мы хотим, чтобы компьютер ходил случайно, проверим, чтобы он не мог пойти в уже занятую клетку.</p>
@@ -15,7 +15,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='84'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in cell that is not taken', () => { 
+<pre data-start='84'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in cell that is not taken', () => {
   // fill all the cells with user's symbol except last
   for (let i = 0; i &lt; 3; i++) {
     for (let j = 0; j &lt; 3; j++) {
@@ -87,7 +87,7 @@
   }
 }
 
-const count = (arr, symbol) => 
+const count = (arr, symbol) =>
   arr.reduce((result, row) => {
     return row.reduce((count, el) => {
       return el === symbol ? ++count : count
@@ -96,14 +96,14 @@ const count = (arr, symbol) =>
 
 // ...
 
-  test('Computer moves in cell that is not taken', () => { 
+  test('Computer moves in cell that is not taken', () => {
     fillCells(game)
 
     game.createComputerMove()
     const board = game.getState()
 
     expect(count(board, userMoveSymbol)).toBe(8)
-    expect(count(board, computerMoveSymbol)).toBE(1)
+    expect(count(board, computerMoveSymbol)).toBe(1)
     expect(board[2][2]).toEqual(computerMoveSymbol)
   })</code></pre>
     </div>
@@ -118,7 +118,7 @@ const count = (arr, symbol) =>
   <pre data-start='30'><div class='code-filename'>src/Game.js</div><code class='language-js line-numbers'>  createComputerMove() {
     if (this._getFreeCellsCount() === 0) return false
     const [x, y] = this._getFreeRandomCoordinates()
-    
+
     this._updateHistory(this._computerName, x, y)
     this._updateBoard(x, y, {
       symbol: this._computerMoveSymbol

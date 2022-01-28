@@ -16,13 +16,13 @@
     </div>
 
     <div class='code'>
-<pre data-start='121'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Checks if user won by horizontal', () => {
+<pre data-start='121'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Checks if user won by horizontal', () => {
   game.acceptUserMove(0, 0)
   game.acceptUserMove(0, 1)
   game.acceptUserMove(0, 2)
   const userWon = game.isWinner(userName)
 
-  expect(userWon).to.equal(true)
+  expect(userWon).toEqual(true)
 })</code></pre>
 
 <pre data-start='46'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+ isWinner(player) {

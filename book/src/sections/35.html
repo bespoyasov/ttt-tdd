@@ -15,7 +15,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='105'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>  it('Makes computer move right after users move', () => {
+<pre data-start='105'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>  test('Makes computer move right after users move', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -23,7 +23,7 @@
     document.querySelector('table td').click()
     const text = document.querySelector('table').textContent
 
-    expect(text.indexOf('o') > -1).to.be.true
+    expect(text.indexOf('o') > -1).toBe(true)
   })</code></pre>
     </div>
   </div>

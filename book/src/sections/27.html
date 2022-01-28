@@ -58,11 +58,11 @@ class GameBuilder {
 
 export default GameBuilder</code></pre>
 
-<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import GameBuilder from './GameBuilder'
+<pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>import GameBuilder from '../src/GameBuilder'
 
 // ...
 
-it('Checks if user won by horizontal', () => {
+test('Checks if user won by horizontal', () => {
   const game = new GameBuilder()
     .withBoardState(`
       x x x

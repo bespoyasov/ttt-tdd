@@ -1,15 +1,15 @@
-var webpack = require('webpack')
-var path = require('path')
+import webpack from 'webpack'
+import path from 'path'
 
-module.exports = [{
+export default [{
   name: 'client',
   mode: 'production',
-  context: path.resolve(__dirname),
+  context: path.resolve(),
   entry: {
-    javascript: ['babel-polyfill', './src/index.js']
+    javascript: ['./src/index.js']
   },
   output: {
     filename: './js/bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
   },
 }]

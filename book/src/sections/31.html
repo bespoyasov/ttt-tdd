@@ -16,13 +16,13 @@
     </div>
 
     <div class='code'>
-<pre data-start='40'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>it('Remembers indices of last clicked cell', () => {
+<pre data-start='40'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>test('Remembers indices of last clicked cell', () => {
   const domController = createInstance()
 
   domController.createTable(3, 3)
   document.querySelector('table td').click()
 
-  expect(domController.lastClickedIndices).to.deep.equal([0, 0])
+  expect(domController.lastClickedIndices).toEqual([0, 0])
 })</code></pre>
 
 <pre data-start='15'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>      for (let j = 0; j &lt; cols; j++) {

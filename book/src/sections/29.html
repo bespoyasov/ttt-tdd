@@ -52,12 +52,12 @@ export default DomController</code></pre>
 <pre data-start='4'><div class='code-filename'>test/dom.js</div><code class='language-diff line-numbers'>+ const createInstance = () => new DomController('#root')
 
   describe('DOM controller', () => {
-    it('Creates empty table', () => {
+    test('Creates empty table', () => {
 -     const domController = new DomController('#root')
 +     const domController = createInstance()
   
       domController.createTable()
-      expect(document.querySelectorAll('table').length).to.equal(1)
+      expect(document.querySelectorAll('table').length).toBe(1)
     })
   })</code></pre></div>
   </div>

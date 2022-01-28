@@ -27,7 +27,7 @@ beforeEach(() => {
 
 // ...
 
-  it('Gets an alert when user makes move in taken cell', () => {
+  test('Gets an alert when user makes move in taken cell', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -35,7 +35,7 @@ beforeEach(() => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).to.be.true
+    expect(window.alert.called).toBe(true)
   })</code></pre>
     </div>
   </div>

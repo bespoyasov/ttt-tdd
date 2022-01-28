@@ -15,15 +15,15 @@
     </div>
 
     <div class='code'>
-      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>import {expect} from 'chai'
+      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>
         
 describe('Game', () => {
-  it('Should return empty game board', () => {
+  test('Should return empty game board', () => {
     const game = new Game()
     
     const board = game.getState()
     
-    expect(board).to.deep.equal([
+    expect(board).toEqual([
       ['', '', ''],
       ['', '', ''],
       ['', '', '']

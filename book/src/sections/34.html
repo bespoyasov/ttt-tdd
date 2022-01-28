@@ -15,7 +15,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='94'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'> it('Redraws table on cell click', () => {
+<pre data-start='94'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'> test('Redraws table on cell click', () => {
     const game = createGame()
     const domController = createInstance(game)
 
@@ -23,7 +23,7 @@
     document.querySelector('table td').click()
     const text = document.querySelector('table td').textContent
 
-    expect(text).to.be.equal('×')
+    expect(text).toEqual('×')
   })</code></pre>
 
 <pre data-start='40'><div class='code-filename'>scr/DomController.js</div><code class='language-diff line-numbers'>  _makeUserMove(row, col) {

@@ -17,13 +17,13 @@
     </div>
 
     <div class='code'>
-<pre data-start='32'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>it('Throws an exception if user moves in taken cell', () => {
+<pre data-start='32'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Throws an exception if user moves in taken cell', () => {
   const x = 2, y = 2
 
   game.acceptUserMove(x, y)
   const func = game.acceptUserMove.bind(game, x, y)
   
-  expect(func).to.throw('cell is already taken')
+  expect(func).toThrow('cell is already taken')
 })</code></pre>
     </div>
   </div>

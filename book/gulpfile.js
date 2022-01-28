@@ -30,10 +30,6 @@ const typografRules = [{
   handler: text => text.replace(/\-/g, NON_BREAKING_HYPHEN)
 }]
 
-
-gulp.task('default', ['html', 'css', 'js', 'images', 'favicons', 'watch'])
-gulp.task('build', ['html', 'css', 'js', 'images', 'favicons'])
-
 gulp.task('html', function() {
   return gulp.src('./src/index.html')
     .pipe(fileinclude({
@@ -62,11 +58,8 @@ gulp.task('css', function() {
 })
 
 gulp.task('js', function() {
-  gulp.src('./src/js/*.js')
+  return gulp.src('./src/js/*.js')
     .pipe(gulp.dest('./dist/js/'))
-
-  gulp.src('./src/sw.js')
-    .pipe(gulp.dest('./dist/'))
 })
 
 gulp.task('images', function() {
@@ -76,18 +69,21 @@ gulp.task('images', function() {
     .pipe(gulp.dest('./dist/img/'))
   
   // convert to webp
-  gulp.src('./src/img/**/*.{jpg,png}')
+  return gulp.src('./src/img/**/*.{jpg,png}')
     .pipe(webp())
     .pipe(gulp.dest('./dist/img/'))
 })
 
 gulp.task('favicons', function() {
-  gulp.src('./src/favicons/**/*')
+  return gulp.src('./src/favicons/**/*')
     .pipe(gulp.dest('./dist/favicons/'))
 })
 
 gulp.task('watch', function() {
-  gulp.watch(WATCHERS.html, ['html'])
-  gulp.watch(WATCHERS.styles, ['css'])
-  gulp.watch(WATCHERS.js, ['js'])
+  gulp.watch(WATCHERS.html, gulp.series('html'))
+  gulp.watch(WATCHERS.styles, gulp.series('css'))
+  gulp.watch(WATCHERS.js, gulp.series('js'))
 })
+
+gulp.task('default', gulp.series('html', 'css', 'js', 'images', 'favicons', 'watch'))
+gulp.task('build', gulp.series('html', 'css', 'js', 'images', 'favicons'))

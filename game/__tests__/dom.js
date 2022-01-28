@@ -114,8 +114,8 @@ describe('JS dom', () => {
 
   test('Creates status text below table is someone wins', () => {
     const game = createGame([
-      ['×', '×', ''], 
-      ['', '', ''], 
+      ['×', '×', ''],
+      ['', '', ''],
       ['', '', '']
     ])
 
@@ -130,8 +130,8 @@ describe('JS dom', () => {
 
   test('Creates clear button if someone wins', () => {
     const game = createGame([
-      ['×', '×', ''], 
-      ['', '', ''], 
+      ['×', '×', ''],
+      ['', '', ''],
       ['', '', '']
     ])
 
@@ -147,8 +147,8 @@ describe('JS dom', () => {
 
   test('Clears table on button click', () => {
     const game = createGame([
-      ['×', '×', ''], 
-      ['', '', ''], 
+      ['×', '×', ''],
+      ['', '', ''],
       ['', '', '']
     ])
 

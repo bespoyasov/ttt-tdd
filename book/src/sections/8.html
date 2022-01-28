@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>Первым делом вынесем <i>'&times;'</i> в константы как в тестах, так и в коде класса.</p>
@@ -18,7 +18,7 @@
 
     <div class='code'>
 <pre><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>
-import Game from '../src/Game.js'
+import Game from '../src/Game'
 
 const userMoveSymbol = '×'
 const initialGameBoard = [
@@ -32,7 +32,7 @@ beforeEach(() => { game = new Game() })
 
 describe('Game', () => {
   // ...
-  
+
   test('Writes user\'s symbol in top left cell', () => {
     const x = 0, y = 0
 

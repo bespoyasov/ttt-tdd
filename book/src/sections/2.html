@@ -44,19 +44,19 @@
       <p>Создадим конфигурацию сборки и пропишем входной файл. Сборка нам понадобится ближе к концу разработки, но, чтобы не отвлекаться в будущем, настроим её сейчас.</p>
     </div>
     <div class='code'>
-      <pre><div class='code-filename'>webpack.config.js</div><code class='line-numbers language-js'>const webpack = require('webpack')
-const path = require('path')
+      <pre><div class='code-filename'>webpack.config.js</div><code class='line-numbers language-js'>import webpack from 'webpack'
+import path from 'path'
 
-module.exports = [{
+export default [{
   name: 'client',
   mode: 'production',
-  context: path.resolve(__dirname),
+  context: path.resolve(),
   entry: {
     javascript: ['./src/index.js']
   },
   output: {
     filename: './js/bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
   },
 }]</code></pre>
     </div>

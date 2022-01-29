@@ -1,6 +1,5 @@
-import { describe, test, expect, beforeEach, afterEach } from '@jest/globals';
+import { describe, test, expect, beforeEach, afterEach, jest } from '@jest/globals';
 import jsdom from 'jsdom'
-import sinon from 'sinon'
 
 import Game from '../src/Game'
 import DomController from '../src/DomController'
@@ -22,12 +21,15 @@ const createInstance = (game={}) => {
 }
 
 beforeEach(() => {
-  window.alert = sinon.spy()
-  window.confirm = sinon.spy()
+  window.alert = jest.spyOn(window, 'alert')
+  window.confirm = jest.spyOn(window, 'confirm')
 })
 
 afterEach(() => {
   document.body.innerHTML = ''
+
+  window.alert.mockReset()
+  window.confirm.mockReset()
 })
 
 describe('JS dom', () => {
@@ -59,13 +61,13 @@ describe('JS dom', () => {
   })
 
   test('Makes user move in game on cell click', () => {
-    const gameMock = { acceptUserMove: sinon.spy() }
+    const gameMock = { acceptUserMove: jest.fn() }
     const domController = createInstance(gameMock)
 
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.game.acceptUserMove.called).toBe(true)
+    expect(domController.game.acceptUserMove).toHaveBeenCalled()
   })
 
   test('Checks initialization of table by game state', () => {
@@ -87,7 +89,7 @@ describe('JS dom', () => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).toBe(true)
+    expect(window.alert).toHaveBeenCalled()
   })
 
   test('Redraws table on cell click', () => {

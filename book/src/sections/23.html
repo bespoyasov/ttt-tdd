@@ -23,13 +23,13 @@
   const computerMoveSymbol = 'o'
 
   // ...
-  const stub = sinon.stub(Math, 'random').returns(0.5)
+  const mock = jest.spyOn(global.Math, 'random').mockReturnValue(0.5)
 
   game.createComputerMove()
   const board = game.getState()
 
   expect(board[1][1]).toEqual(computerMoveSymbol)
-  stub.restore()
+  mock.mockRestore()
 })</code></pre>
     </div>
   </div>
@@ -67,14 +67,14 @@
   // ...
 
   it('Game saves computer\'s move in history', () => {
-+   const stub = sinon.stub(Math, 'random').returns(0.5)
++   const mock = jest.spyOn(global.Math, 'random').mockReturnValue(0.5)
 
     game.createComputerMove()
     const history = game.getMoveHistory()
 
 -   expect(history).toEqual([{turn: computerName, x: 0, y: 0}])
 +   expect(history).toEqual([{turn: computerName, x: 1, y: 1}])
-+   stub.restore()
++   mock.mockRestore()
   })</code></pre>
     </div>
   </div>

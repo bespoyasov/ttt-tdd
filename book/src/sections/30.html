@@ -19,6 +19,9 @@
     <div class='code'>
 <pre data-start='16'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>afterEach(() => {
   document.body.innerHTML = ''
+
+  window.alert.mockReset()
+  window.confirm.mockReset()
 })
   
 // ...

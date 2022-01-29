@@ -18,7 +18,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='3'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>import sinon from 'sinon'
+<pre data-start='3'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>
 
 // ...
 
@@ -32,13 +32,13 @@ const createInstance = (game={}) => {
 // ...
 
   it('Makes user move in game on cell click', () => {
-    const gameMock = { acceptUserMove: sinon.spy() }
+    const gameMock = { acceptUserMove: jest.fn() }
     const domController = createInstance(gameMock)
 
     domController.createTable(3, 3)
     document.querySelector('table td').click()
 
-    expect(domController.game.acceptUserMove.called).toBe(true)
+    expect(domController.game.acceptUserMove).toHaveBeenCalled()
   })</code></pre>
 
 <pre><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  class DomController {

@@ -21,8 +21,8 @@
 // ...
 
 beforeEach(() => {
-  window.alert = sinon.spy()
-  window.confirm = sinon.spy()
+  window.alert = jest.spyOn(window, 'alert')
+  window.confirm = jest.spyOn(window, 'confirm')
 })
 
 // ...
@@ -35,7 +35,7 @@ beforeEach(() => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).toBe(true)
+    expect(window.alert).toHaveBeenCalled()
   })</code></pre>
     </div>
   </div>

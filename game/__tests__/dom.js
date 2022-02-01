@@ -22,14 +22,12 @@ const createInstance = (game={}) => {
 
 beforeEach(() => {
   window.alert = jest.spyOn(window, 'alert')
-  window.confirm = jest.spyOn(window, 'confirm')
 })
 
 afterEach(() => {
   document.body.innerHTML = ''
 
   window.alert.mockReset()
-  window.confirm.mockReset()
 })
 
 describe('JS dom', () => {

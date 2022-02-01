@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach, afterEach, jest } from '@jest/globals';
+import { describe, test, expect, beforeEach, afterEach, afterAll, jest } from '@jest/globals';
 import jsdom from 'jsdom'
 
 import Game from '../src/Game'
@@ -28,6 +28,10 @@ afterEach(() => {
   document.body.innerHTML = ''
 
   window.alert.mockReset()
+})
+
+afterAll(() => {
+  window.alert.mockRestore()
 })
 
 describe('JS dom', () => {

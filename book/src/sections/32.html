@@ -29,7 +29,7 @@ const createInstance = (game={}) => {
 
 // ...
 
-  it('Makes user move in game on cell click', () => {
+  test('Makes user move in game on cell click', () => {
     const gameMock = { acceptUserMove: jest.fn() }
     const domController = createInstance(gameMock)
 

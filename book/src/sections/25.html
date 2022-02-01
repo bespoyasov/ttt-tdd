@@ -66,13 +66,13 @@
 
   // ...
 
-  it('Computer moves in cell that is not taken', () => {
+  test('Computer moves in cell that is not taken', () => {
 -   fillCells(game)
 +   fillCells(game, {x: 2, y: 2})
 
   // ...
 
-  it('If there are no free cells computer throws an exception', () => {
+  test('If there are no free cells computer throws an exception', () => {
 -   // fill all the cells
 -   for (let i = 0; i &lt; 3; ++i) {
 -     for (let j = 0; j &lt; 3; ++j) {

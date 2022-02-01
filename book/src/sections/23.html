@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>Допустим, текущая реализация истории нас устраивает. Можем вернуться к разработке хода компьютера.</p>
@@ -18,7 +18,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='82'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in randomly chosen cell', () => { 
+<pre data-start='82'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Computer moves in randomly chosen cell', () => {
   const userMoveSymbol = '×'
   const computerMoveSymbol = 'o'
 
@@ -48,7 +48,7 @@
 <pre data-start='29'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  createComputerMove() {
 +   const x = Math.floor(Math.random() * (3 - 0))
 +   const y = Math.floor(Math.random() * (3 - 0))
-+   
++
 -   this._updateHistory(this._computerName, 0, 0)
 -   this._updateBoard(0, 0, {
 +   this._updateHistory(this._computerName, x, y)
@@ -57,16 +57,16 @@
     })
   }</code></pre>
 
-<pre data-start='47'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>- it('Computer moves in top left cell', () => { 
+<pre data-start='47'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>- test('Computer moves in top left cell', () => {
 -   game.createComputerMove()
 -   const board = game.getState()
-- 
+-
 -   expect(board[0][0]).toEqual(computerMoveSymbol)
 - })
-  
+
   // ...
 
-  it('Game saves computer\'s move in history', () => {
+  test('Game saves computer\'s move in history', () => {
 +   const mock = jest.spyOn(global.Math, 'random').mockReturnValue(0.5)
 
     game.createComputerMove()
@@ -89,7 +89,7 @@
     <div class='code'>
 <pre data-start='6'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>  this._computerMoveSymbol = 'o'
 +   this._fieldSize = 3
-  
+
   // ...
 
   createComputerMove() {
@@ -99,7 +99,7 @@
 +   const y = this._getRandomCoordinate()
 +
     this._updateHistory(this._computerName, x, y)
-  
+
   // ...
 
 + _getRandomCoordinate() {

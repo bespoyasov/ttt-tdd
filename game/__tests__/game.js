@@ -1,5 +1,4 @@
-import { describe, test, expect, beforeEach } from '@jest/globals';
-import sinon from 'sinon'
+import { describe, test, expect, beforeEach, jest } from '@jest/globals';
 import Game from '../src/Game'
 import GameBuilder from '../src/GameBuilder'
 
@@ -67,13 +66,13 @@ describe('Game', () => {
   })
 
   test('Game saves computer\'s move in history', () => {
-    const stub = sinon.stub(Math, 'random').returns(0.5)
+    const mock = jest.spyOn(global.Math, 'random').mockReturnValue(0.5)
 
     game.createComputerMove()
     const history = game.getMoveHistory()
 
     expect(history).toEqual([{turn: computerName, x: 1, y: 1}])
-    stub.restore()
+    mock.mockRestore()
   })
 
   test('Game saves 1 user\'s move and 1 computer\'s move in history', () => {
@@ -89,13 +88,13 @@ describe('Game', () => {
   })
 
   test('Computer moves in randomly chosen cell', () => {
-    const stub = sinon.stub(Math, 'random').returns(0.5)
+    const mock = jest.spyOn(global.Math, 'random').mockReturnValue(0.5)
 
     game.createComputerMove()
     const board = game.getState()
 
     expect(board[1][1]).toEqual(computerMoveSymbol)
-    stub.restore()
+    mock.mockRestore()
   })
 
   test('Computer moves in cell that is not taken', () => {

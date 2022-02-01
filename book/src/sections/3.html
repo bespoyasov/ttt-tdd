@@ -15,14 +15,12 @@
     </div>
 
     <div class='code'>
-      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>
-        
-describe('Game', () => {
+      <pre><div class='code-filename'>test/game.js</div><code class='line-numbers language-js'>describe('Game', () => {
   test('Should return empty game board', () => {
     const game = new Game()
-    
+
     const board = game.getState()
-    
+
     expect(board).toEqual([
       ['', '', ''],
       ['', '', ''],

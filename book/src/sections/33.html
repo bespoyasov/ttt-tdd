@@ -11,8 +11,9 @@
     <div class='text'>
       <p>Я пропущу создание и тестирование метода <i>init</i> у контроллера. Этот метод запрашивает у модели игры размер доски и строит таблицу по нему. Исходный код и тесты этого метода и сопутствующих ему, можно <a href='https://github.com/bespoyasov/ttt-tdd/tree/master/game'>посмотреть на гитхабе</a>.</p>
       <p>Сейчас перейдём к проверке ситуации, когда пользователь кликнул на занятую клетку. Пусть в этот момент будет выскакивать <i>alert</i> с сообщением, что клетка уже занята.</p>
-      <p>Проверить, вызван ли <i>alert</i> можно также с помощью шпиона.</p>
+      <p>Проверить это можно с помощью <a href='https://gaboesquivel.com/blog/2014/unit-testing-mocks-stubs-and-spies/'>шпиона (spy)</a>, который будет следить за вызовами <i>alert</i>. Если <i>alert</i> был вызван, то метод шпиона <i>toHaveBeenCalled</i> вернёт истину.</p>
       <p>Так как мы использовали <i>try-catch</i> ошибка, полученная от <i>acceptUserMove</i> вызывает <i>alert</i> внутри <i>_handleCellClick</i> класса <i>DomController</i>. Тест автоматически пройден.</p>
+      <p>Также сразу позаботимся об очистке шпиона. В начале каждого теста он должен быть свежим, будто его ни разу не вызывали. Для этого будем сбрасывать его состояние после каждого теста в <i>afterEach</i>. После прохождения же всех тестов в <i>afterAll</i> восстановим метод <i>window.alert</i>, полностью очистив его от шпиона.</p>
     </div>
 
     <div class='code'>
@@ -21,8 +22,17 @@
 // ...
 
 beforeEach(() => {
-  window.alert = sinon.spy()
-  window.confirm = sinon.spy()
+  window.alert = jest.spyOn(window, 'alert')
+})
+
+afterEach(() => {
+  // ...
+
+  window.alert.mockReset()
+})
+
+afterAll(() => {
+  window.alert.mockRestore()
 })
 
 // ...
@@ -35,7 +45,7 @@ beforeEach(() => {
     document.querySelector('table td').click()
     document.querySelector('table td').click()
 
-    expect(window.alert.called).toBe(true)
+    expect(window.alert).toHaveBeenCalled()
   })</code></pre>
     </div>
   </div>

@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>Если пользователь или компьютер побеждает в игре, покажем это.</p>
@@ -16,24 +16,24 @@
     </div>
 
     <div class='code'>
-<pre data-start='116'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>test('Creates status text below table if someone wins', () => {
-  const game = createGame([
-    ['×', '×', ''], 
-    ['', '', ''], 
-    ['', '', '']
-  ])
+<pre data-start='116'><div class='code-filename'>test/dom.js</div><code class='language-js line-numbers'>  test('Creates status text below table if someone wins', () => {
+    const game = createGame([
+      ['×', '×', ''],
+      ['', '', ''],
+      ['', '', '']
+    ])
 
-  const domController = createInstance(game)
+    const domController = createInstance(game)
 
-  domController.init()
-  document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
+    domController.init()
+    document.querySelector('table tr:nth-child(1) td:nth-child(3)').click()
 
-  const status = document.querySelector('#status')
-  expect(status.textContent).toEqual('user won!')
-})</code></pre>
+    const status = document.querySelector('#status')
+    expect(status.textContent).toEqual('user won!')
+  })</code></pre>
 
 <pre data-start='33'><div class='code-filename'>src/DomController.js</div><code class='language-diff line-numbers'>  this._makeUserMove(row, col)
-      
+
 + const state = this.game.checkGame()
 + if (state !== 'continue') {
 +   const node = document.createElement('div')
@@ -61,7 +61,7 @@
       this._makeUserMove(row, col)
       const continues = this._checkContinue()
       if (!continues) return
-      
+
       this._makeComputerMove()
       this._checkContinue()
     }
@@ -74,7 +74,7 @@
 
   _checkContinue() {
     const state = this.game.checkGame()
-    
+
     if (state !== 'continue') {
       const status = this._createNode('div', {
         text: state,
@@ -84,7 +84,7 @@
       this.rootNode.appendChild(status)
       return false
     }
-    
+
     return true
   }
 

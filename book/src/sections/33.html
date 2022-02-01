@@ -11,8 +11,9 @@
     <div class='text'>
       <p>Я пропущу создание и тестирование метода <i>init</i> у контроллера. Этот метод запрашивает у модели игры размер доски и строит таблицу по нему. Исходный код и тесты этого метода и сопутствующих ему, можно <a href='https://github.com/bespoyasov/ttt-tdd/tree/master/game'>посмотреть на гитхабе</a>.</p>
       <p>Сейчас перейдём к проверке ситуации, когда пользователь кликнул на занятую клетку. Пусть в этот момент будет выскакивать <i>alert</i> с сообщением, что клетка уже занята.</p>
-      <p>Проверить, вызван ли <i>alert</i> можно также с помощью шпиона.</p>
+      <p>Проверить это можно с помощью <a href='https://gaboesquivel.com/blog/2014/unit-testing-mocks-stubs-and-spies/'>шпиона (spy)</a>. Он будет следить за <i>alert</i>, и если тот был вызван, что <i>toHaveBeenCalled</i> вернёт истину.</p>
       <p>Так как мы использовали <i>try-catch</i> ошибка, полученная от <i>acceptUserMove</i> вызывает <i>alert</i> внутри <i>_handleCellClick</i> класса <i>DomController</i>. Тест автоматически пройден.</p>
+      <p>Также позаботимся об очистке <i>window.alert</i> от шпиона после прохождения всех тестов.</p>
     </div>
 
     <div class='code'>
@@ -22,6 +23,10 @@
 
 beforeEach(() => {
   window.alert = jest.spyOn(window, 'alert')
+})
+
+afterAll(() => {
+  window.alert.mockRestore()
 })
 
 // ...

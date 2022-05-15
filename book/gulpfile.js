@@ -1,20 +1,19 @@
-const fs = require("fs");
-const gulp = require("gulp");
-const path = require("path");
+import fs from "fs";
+import gulp from "gulp";
+import path from "path";
 
-const fileinclude = require("gulp-file-include");
-const htmlmin = require("gulp-htmlmin");
-const typograf = require("gulp-typograf");
+import fileinclude from "gulp-file-include";
+import htmlmin from "gulp-htmlmin";
+import typograf from "gulp-typograf";
 
-const postcss = require("gulp-postcss");
-const importCss = require("gulp-import-css");
+import importCss from "gulp-import-css";
 
-const imagemin = require("gulp-imagemin");
-const webp = require("gulp-webp");
+import imagemin from "gulp-imagemin";
+import webp from "gulp-webp";
 
-const rename = require("gulp-rename");
-const concat = require("gulp-concat");
-const watch = require("gulp-watch");
+import rename from "gulp-rename";
+import concat from "gulp-concat";
+import watch from "gulp-watch";
 
 const NON_BREAKING_HYPHEN = "‑";
 const WATCHERS = {
@@ -62,19 +61,21 @@ gulp.task("js", function () {
   return gulp.src("./src/js/*.js").pipe(gulp.dest("./dist/js/"));
 });
 
-gulp.task("images", function () {
-  // minify
-  gulp
+gulp.task("minify", function () {
+  return gulp
     .src("./src/img/**/*.{jpg,png}")
     .pipe(imagemin())
     .pipe(gulp.dest("./dist/img/"));
+});
 
-  // convert to webp
+gulp.task("webp", function () {
   return gulp
     .src("./src/img/**/*.{jpg,png}")
     .pipe(webp())
     .pipe(gulp.dest("./dist/img/"));
 });
+
+gulp.task("images", gulp.series("minify", "webp"));
 
 gulp.task("meta", function () {
   return gulp.src("./src/meta/**/*").pipe(gulp.dest("./dist/meta/"));
@@ -90,4 +91,5 @@ gulp.task(
   "default",
   gulp.series("html", "css", "js", "images", "meta", "watch")
 );
+
 gulp.task("build", gulp.series("html", "css", "js", "images", "meta"));

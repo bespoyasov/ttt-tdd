@@ -58,7 +58,12 @@ gulp.task("css", function () {
 });
 
 gulp.task("js", function () {
-  return gulp.src("./src/js/*.js").pipe(gulp.dest("./dist/js/"));
+  return gulp
+    .src([
+      "./node_modules/ilyabirman-likely/release/likely.min.js",
+      "./src/js/*.js",
+    ])
+    .pipe(gulp.dest("./dist/js/"));
 });
 
 gulp.task("minify", function () {

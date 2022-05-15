@@ -1,5 +1,5 @@
 @import url(./_prism.css);
-@import url(./_likely.css);
+@import url(../../node_modules/ilyabirman-likely/release/likely.min.css);
 
 @import url(./global.css);
 @import url(./anchor.css);

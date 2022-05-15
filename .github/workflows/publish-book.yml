@@ -6,7 +6,6 @@ on:
       - master
     paths:
       - "book/src/**"
-      - ".github/workflows/publish-book.yml"
 
 jobs:
   publish:

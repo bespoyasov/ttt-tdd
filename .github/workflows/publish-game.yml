@@ -1,0 +1,37 @@
+name: Publish Game
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "game/src/**"
+      - "game/__tests__/**"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: game
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+
+      - run: npm ci
+      - run: npm run test
+      - run: npm run build
+
+      - name: Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          remote-dir: "game/"
+          local-dir: "dist/"
+          log-level: minimal

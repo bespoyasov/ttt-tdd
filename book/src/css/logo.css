@@ -1,16 +1,16 @@
-.tic, 
+.tic,
 .tac {
   display: inline-block;
   vertical-align: top;
   width: 2rem;
-  height:3rem;
+  height: 3rem;
   position: relative;
 }
 
 .tic:before,
 .tic:after {
   position: absolute;
-  content: ' ';
+  content: " ";
   height: 2.2rem;
   width: 6px;
   left: 0.8rem;
@@ -26,7 +26,7 @@
 
 .tac:before {
   position: absolute;
-  content:' ';
+  content: " ";
   border: 6px solid black;
   width: 1.2rem;
   height: 1.2rem;

@@ -57,8 +57,6 @@ a:hover {
 pre {
   margin: -1.2rem 0 0 0;
   padding: 0.25rem 0 0 0;
-  font-size: 0.8rem;
-  line-height: 1.2rem;
   overflow-x: auto;
   width: 100%;
   -webkit-overflow-scrolling: touch;
@@ -103,6 +101,11 @@ p > code {
 .disclaimer,
 .disclaimer a {
   color: rgba(0, 0, 0, 0.3);
+}
+
+.code {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
 }
 
 .token.operator,

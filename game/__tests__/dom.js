@@ -41,7 +41,7 @@ afterAll(() => {
   window.alert.mockRestore();
 });
 
-describe("JS dom", () => {
+describe("DOM Controller", () => {
   test("Creates empty table", () => {
     const domController = createInstance();
 

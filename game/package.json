@@ -12,6 +12,7 @@
     "build": "webpack"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.0",
     "jsdom": "^19.0.0",
     "webpack": "^5.67.0",

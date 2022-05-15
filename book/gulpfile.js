@@ -60,9 +60,13 @@ gulp.task("css", function () {
 gulp.task("js", function () {
   return gulp
     .src([
+      "./node_modules/prismjs/prism.js",
+      "./node_modules/prismjs/components/prism-diff.min.js",
+      "./node_modules/prismjs/components/prism-json.min.js",
+      "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.min.js",
       "./node_modules/ilyabirman-likely/release/likely.min.js",
-      "./src/js/*.js",
     ])
+    .pipe(concat("libs.js"))
     .pipe(gulp.dest("./dist/js/"));
 });
 

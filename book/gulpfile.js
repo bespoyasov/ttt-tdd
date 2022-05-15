@@ -5,11 +5,11 @@ import path from "path";
 import fileinclude from "gulp-file-include";
 import htmlmin from "gulp-htmlmin";
 import typograf from "gulp-typograf";
-
 import importCss from "gulp-import-css";
 
 import imagemin from "gulp-imagemin";
 import webp from "gulp-webp";
+import avif from "gulp-avif";
 
 import rename from "gulp-rename";
 import concat from "gulp-concat";
@@ -75,7 +75,14 @@ gulp.task("webp", function () {
     .pipe(gulp.dest("./dist/img/"));
 });
 
-gulp.task("images", gulp.series("minify", "webp"));
+gulp.task("avif", function () {
+  return gulp
+    .src("./src/img/**/*.{jpg,png}")
+    .pipe(avif())
+    .pipe(gulp.dest("./dist/img/"));
+});
+
+gulp.task("images", gulp.series("minify", "webp", "avif"));
 
 gulp.task("meta", function () {
   return gulp.src("./src/meta/**/*").pipe(gulp.dest("./dist/meta/"));

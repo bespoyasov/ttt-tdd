@@ -8,7 +8,6 @@ on:
       - "game/src/**"
       - "game/assets/**"
       - "game/__tests__/**"
-      - ".github/workflows/publish-game.yml"
 
 jobs:
   publish:

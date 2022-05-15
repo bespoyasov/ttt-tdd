@@ -76,7 +76,7 @@ gulp.task("images", function () {
     .pipe(gulp.dest("./dist/img/"));
 });
 
-gulp.task("favicons", function () {
+gulp.task("meta", function () {
   return gulp.src("./src/meta/**/*").pipe(gulp.dest("./dist/meta/"));
 });
 
@@ -88,6 +88,6 @@ gulp.task("watch", function () {
 
 gulp.task(
   "default",
-  gulp.series("html", "css", "js", "images", "favicons", "watch")
+  gulp.series("html", "css", "js", "images", "meta", "watch")
 );
-gulp.task("build", gulp.series("html", "css", "js", "images", "favicons"));
+gulp.task("build", gulp.series("html", "css", "js", "images", "meta"));

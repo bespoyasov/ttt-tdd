@@ -34,6 +34,7 @@ jobs:
           server: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
+          state-name: ${{ secrets.DEPLOY_KEY_GAME }}
           remote-dir: "game/"
           local-dir: "game/dist/"
           log-level: minimal

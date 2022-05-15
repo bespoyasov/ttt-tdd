@@ -22,7 +22,7 @@
 
   game.acceptUserMove(x, y)
   const func = game.acceptUserMove.bind(game, x, y)
-  
+
   expect(func).toThrow('cell is already taken')
 })</code></pre>
     </div>

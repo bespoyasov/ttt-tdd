@@ -21,10 +21,10 @@
     <div class='code'>
 <pre data-start='20'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ test('Writes user\'s symbol in top left cell', () => {
 +   const x = 0, y = 0
-+ 
++
 +   game.acceptUserMove(x, y)
 +   const board = game.getState()
-+ 
++
 +   expect(board[x][y]).toEqual('×')
 + })</code></pre>
 <pre data-start='8'><div class='code-filename'>src/Game.js</div><code class='language-diff line-numbers'>+ acceptUserMove(x, y) {

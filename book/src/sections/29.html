@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>В конструкторе привяжем класс к переданной ноде и сохраним её в <i>rootNode</i>. Всю работу ограничим внутри неё.</p>
@@ -20,7 +20,7 @@
     constructor(root) {
 +     this.rootNode = document.querySelector(root)
     }
-    
+
     createTable() {
 +     const child = document.createElement('table')
 +     this.rootNode.appendChild(child)
@@ -40,7 +40,7 @@
   constructor(root) {
     this.rootNode = document.querySelector(root)
   }
-  
+
   createTable() {
     const child = document.createElement('table')
     this.rootNode.appendChild(child)
@@ -55,7 +55,7 @@ export default DomController</code></pre>
     test('Creates empty table', () => {
 -     const domController = new DomController('#root')
 +     const domController = createInstance()
-  
+
       domController.createTable()
       expect(document.querySelectorAll('table').length).toBe(1)
     })

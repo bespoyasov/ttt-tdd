@@ -7,7 +7,7 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
       <p>Теперь будем сохранять ход компьютера в истории.</p>
@@ -15,7 +15,7 @@
     </div>
 
     <div class='code'>
-<pre data-start='63'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Game saves computers\'s move in history', () => { 
+<pre data-start='63'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Game saves computers\'s move in history', () => {
   game.createComputerMove()
   const history = game.getMoveHistory()
 
@@ -27,7 +27,7 @@
   <div class='grid'>
     <div class='text'>
       <p>Доработаем логику игры так, чтобы при вызове хода игрока или компьютера ход автоматически записывался в историю.</p>
-      <p>Сделаем историю изначально пустой. Сейчас падают два теста: последний и предыдущий. Это верно, так как теперь ход игрока тоже не записывается.</p> 
+      <p>Сделаем историю изначально пустой. Сейчас падают два теста: последний и предыдущий. Это верно, так как теперь ход игрока тоже не записывается.</p>
       <p>Допишем обновление истории в метод <i>acceptUserMove</i>, чтобы записывать ходы игрока, и в метод <i>createComputerMove</i>, чтобы записывать ходы компьютера.</p>
       <p>Теперь все тесты зелёные. Можно приступать к рефакторингу.</p>
     </div>
@@ -62,7 +62,7 @@
 
     <div class='code'>
 <pre data-start='5'><div class='code-filename'>test/game.js</div><code class='language-diff line-numbers'>+ const computerName = 'computer'
-  
+
   // ...
 
 -   expect(history).toEqual([{turn: 'computer', x: 0, y: 0}])
@@ -86,7 +86,7 @@
     this._updateBoard(0, 0, {
 
   // ...
-  
+
 + _updateHistory(turn, x, y) {
 +   this._history.push({turn, x, y})
 + }</code></pre>

@@ -40,8 +40,8 @@ describe("Game", () => {
   });
 
   test("Writes user's symbol in cell with given coordinates", () => {
-    const x = 1,
-      y = 1;
+    const x = 1;
+    const y = 1;
 
     game.acceptUserMove(x, y);
     const board = game.getState();
@@ -50,8 +50,8 @@ describe("Game", () => {
   });
 
   test("Throws an exception if user moves in taken cell", () => {
-    const x = 2,
-      y = 2;
+    const x = 2;
+    const y = 2;
 
     game.acceptUserMove(x, y);
     const func = game.acceptUserMove.bind(game, x, y);
@@ -60,8 +60,8 @@ describe("Game", () => {
   });
 
   test("Game saves user's move in history", () => {
-    const x = 1,
-      y = 1;
+    const x = 1;
+    const y = 1;
 
     game.acceptUserMove(x, y);
     const history = game.getMoveHistory();
@@ -80,8 +80,8 @@ describe("Game", () => {
   });
 
   test("Game saves 1 user's move and 1 computer's move in history", () => {
-    const x = 1,
-      y = 1;
+    const x = 1;
+    const y = 1;
 
     game.acceptUserMove(x, y);
     game.createComputerMove();

@@ -1,10 +1,10 @@
-import DomController from './DomController.js'
-import Game from './Game.js'
+import DomController from "./DomController.js";
+import Game from "./Game.js";
 
-const game = new Game()
+const game = new Game();
 const dom = new DomController({
-  root: 'body', 
-  game
-})
+  root: "body",
+  game,
+});
 
-dom.init()
+dom.init();

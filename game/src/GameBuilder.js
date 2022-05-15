@@ -1,28 +1,28 @@
-import Game from './Game.js'
+import Game from "./Game.js";
 
 class GameBuilder {
   constructor() {
-    this.game = new Game()
+    this.game = new Game();
   }
 
   withBoardState(state) {
     state = state
-      .split('\n')
-      .filter(item => !!item.trim())
-      .map(item => item.trim().split(' '))
+      .split("\n")
+      .filter((item) => !!item.trim())
+      .map((item) => item.trim().split(" "));
 
     state.forEach((item, i) => {
       item.forEach((symbol, j) => {
-        if (symbol === 'x') this.game.acceptUserMove(i, j)
-      })
-    })
-    
-    return this
+        if (symbol === "x") this.game.acceptUserMove(i, j);
+      });
+    });
+
+    return this;
   }
 
   build() {
-    return this.game
+    return this.game;
   }
 }
 
-export default GameBuilder
+export default GameBuilder;

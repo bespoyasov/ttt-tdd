@@ -35,5 +35,5 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
           remote-dir: "game/"
-          local-dir: "dist/"
+          local-dir: "game/dist/"
           log-level: minimal

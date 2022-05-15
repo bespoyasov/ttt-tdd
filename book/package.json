@@ -36,7 +36,6 @@
     "gulp-webp": "^3.0.0"
   },
   "dependencies": {
-    "autoprefixer": "^8.6.5",
     "gulp-typograf": "^3.1.0"
   }
 }

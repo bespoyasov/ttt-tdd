@@ -7,7 +7,6 @@ const htmlmin = require("gulp-htmlmin");
 const typograf = require("gulp-typograf");
 
 const postcss = require("gulp-postcss");
-const autoprefixer = require("autoprefixer");
 const importCss = require("gulp-import-css");
 
 const imagemin = require("gulp-imagemin");
@@ -56,13 +55,6 @@ gulp.task("css", function () {
   return gulp
     .src("./src/css/style.css")
     .pipe(importCss())
-    .pipe(
-      postcss([
-        autoprefixer({
-          browsers: ["last 4 versions", "ios 7"],
-        }),
-      ])
-    )
     .pipe(gulp.dest("./dist/css/"));
 });
 

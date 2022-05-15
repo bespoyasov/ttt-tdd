@@ -36,5 +36,8 @@
     "gulp-typograf": "^4.0.3",
     "gulp-watch": "^5.0.1",
     "gulp-webp": "^4.0.1"
+  },
+  "dependencies": {
+    "ilyabirman-likely": "^2.6.0"
   }
 }

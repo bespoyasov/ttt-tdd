@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "game/src/**"
+      - "game/assets/**"
       - "game/__tests__/**"
       - ".github/workflows/publish-game.yml"
 

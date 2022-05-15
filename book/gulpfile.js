@@ -77,7 +77,7 @@ gulp.task("images", function () {
 });
 
 gulp.task("favicons", function () {
-  return gulp.src("./src/favicons/**/*").pipe(gulp.dest("./dist/favicons/"));
+  return gulp.src("./src/meta/**/*").pipe(gulp.dest("./dist/meta/"));
 });
 
 gulp.task("watch", function () {

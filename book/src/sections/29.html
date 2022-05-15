@@ -7,11 +7,11 @@
       </h2>
     </div>
   </div>
-  
+
   <div class='grid'>
     <div class='text'>
-      <p>В конструкторе привяжем класс к переданной ноде и сохраним её в <i>rootNode</i>. Всю работу ограничим внутри неё.</p>
-      <p>Внутри <i>createTable</i> создадим пустую таблицу и добавим её внутрь <i>rootNode</i>.</p>
+      <p>В конструкторе привяжем класс к переданной ноде и сохраним её в <code>rootNode</code>. Всю работу ограничим внутри неё.</p>
+      <p>Внутри <code>createTable</code> создадим пустую таблицу и добавим её внутрь <code>rootNode</code>.</p>
       <p>Проверим, что тест проходит, и начнём рефакторить.</p>
     </div>
 
@@ -20,7 +20,7 @@
     constructor(root) {
 +     this.rootNode = document.querySelector(root)
     }
-    
+
     createTable() {
 +     const child = document.createElement('table')
 +     this.rootNode.appendChild(child)
@@ -31,8 +31,8 @@
 
   <div class='grid'>
     <div class='text'>
-      <p>Вынесем класс <i>DomController</i> в отдельный файл.</p>
-      <p>Добавим импорт в файл тестов и вынесем создание экземпляра <i>DomController</i> в функцию <i>createInstance</i>.</p>
+      <p>Вынесем класс <code>DomController</code> в отдельный файл.</p>
+      <p>Добавим импорт в файл тестов и вынесем создание экземпляра <code>DomController</code> в функцию <code>createInstance</code>.</p>
     </div>
 
     <div class='code'>
@@ -40,7 +40,7 @@
   constructor(root) {
     this.rootNode = document.querySelector(root)
   }
-  
+
   createTable() {
     const child = document.createElement('table')
     this.rootNode.appendChild(child)
@@ -55,7 +55,7 @@ export default DomController</code></pre>
     test('Creates empty table', () => {
 -     const domController = new DomController('#root')
 +     const domController = createInstance()
-  
+
       domController.createTable()
       expect(document.querySelectorAll('table').length).toBe(1)
     })

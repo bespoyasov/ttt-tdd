@@ -9,18 +9,18 @@
   </div>
   <div class='grid'>
     <div class='text'>
-      <p>Метод для обновления доски <i>_updateBoard</i> у нас уже есть, но он работает только с крестиком. Доработаем его, добавив третьим параметром объект с настройками.</p>
-      <p>Нолик вынесем в константу <i>_computerMoveSymbol</i>.</p>
+      <p>Метод для обновления доски <code>_updateBoard</code> у нас уже есть, но он работает только с крестиком. Доработаем его, добавив третьим параметром объект с настройками.</p>
+      <p>Нолик вынесем в константу <code>_computerMoveSymbol</code>.</p>
       <p>И как обычно проверяем, что ничего не сломалось.</p>
     </div>
 
     <div class='code'>
 <pre data-start='3'><div class='code-filename'></div><code class='language-diff line-numbers'>  constructor() {
     this._userMoveSymbol = '×'
-+   this._computerMoveSymbol = 'o'  
++   this._computerMoveSymbol = 'o'
     //...
   }
-  
+
   // ...
 
   createComputerMove() {

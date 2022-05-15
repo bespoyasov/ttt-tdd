@@ -4,25 +4,24 @@
 
 body {
   background: #f1f8ff;
-  margin:0;
+  margin: 0;
   font-size: 16px;
-  line-height:1.5em;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.5em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 h1 {
   font-size: 3rem;
-  line-height:0.8em;
-  margin:1rem 0 0.6rem 0;
+  line-height: 0.8em;
+  margin: 1rem 0 0.6rem 0;
 }
 
 h2 {
   font-size: 2rem;
-  line-height:1.2em;
-  margin:0 0 0.6rem 0;
+  line-height: 1.2em;
+  margin: 0 0 0.6rem 0;
 }
 
 h1,
@@ -33,16 +32,16 @@ h2 {
 p,
 img,
 ul {
-  margin:0 0 1rem 0;
+  margin: 0 0 1rem 0;
 }
 
 ul li,
 ol li {
-  padding-bottom:0.4rem;
+  padding-bottom: 0.4rem;
 }
 
 p + ul {
-  margin-top:-1rem
+  margin-top: -1rem;
 }
 
 a {
@@ -56,18 +55,16 @@ a:hover {
 }
 
 pre {
-  margin:-1.2rem 0 0 0;
-  padding:0.25rem 0 0 0;
-  font-size:0.8rem;
-  line-height:1.2rem;
+  margin: -1.2rem 0 0 0;
+  padding: 0.25rem 0 0 0;
   overflow-x: auto;
-  width:100%;
+  width: 100%;
   -webkit-overflow-scrolling: touch;
 }
 
 code {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 abbr {
@@ -82,21 +79,33 @@ figcaption {
   text-align: center;
   padding: 0 1rem 0 0;
   margin: -1rem 0 1rem 0;
-  color: rgba(0, 0, 0, .3);
-  max-width:475px;
+  color: rgba(0, 0, 0, 0.3);
+  max-width: 475px;
 }
-
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: none;
-  margin-top:0;
-  padding-top:0.25rem;
+  margin-top: 0;
+  padding-top: 0.25rem;
+}
+
+p > code {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  white-space: nowrap;
 }
 
 .disclaimer,
 .disclaimer a {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.code {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
 }
 
 .token.operator,
@@ -109,20 +118,19 @@ pre[class*="language-"] {
 }
 
 .line-numbers .line-numbers-rows {
-  border-right-color:rgba(0,0,0,.3)
+  border-right-color: rgba(0, 0, 0, 0.3);
 }
 .line-numbers-rows > span:before {
-  color:rgba(0,0,0,.4)
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .likely__counter {
   display: none !important;
 }
 
-
 @media (max-width: 800px) {
   h2 {
-    margin-bottom:0;
-    font-size:1.8rem;
+    margin-bottom: 0;
+    font-size: 1.8rem;
   }
 }

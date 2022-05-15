@@ -1,31 +1,30 @@
 .bottom {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   padding: 4rem 0 0 0;
 }
 
 .author {
-  width:40%;
+  width: 40%;
 }
 
 .likely {
-  width:60%;
+  width: 60%;
 }
 
 .likely {
   text-align: right;
-  padding: 0.1rem
+  padding: 0.1rem;
 }
 
-
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .author,
   .likely {
-    width:100%;
+    width: 100%;
   }
 
   .likely {
-    padding-top:0.5rem;
+    padding-top: 0.5rem;
     text-align: left;
   }
 }

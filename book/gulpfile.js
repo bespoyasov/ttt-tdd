@@ -1,89 +1,111 @@
-const fs = require('fs')
-const gulp = require('gulp')
-const path = require('path')
+import fs from "fs";
+import gulp from "gulp";
+import path from "path";
 
-const fileinclude = require('gulp-file-include')
-const htmlmin = require('gulp-htmlmin')
-const typograf = require('gulp-typograf')
+import fileinclude from "gulp-file-include";
+import htmlmin from "gulp-htmlmin";
+import typograf from "gulp-typograf";
+import importCss from "gulp-import-css";
 
-const postcss = require('gulp-postcss')
-const autoprefixer = require('autoprefixer')
-const importCss = require('gulp-import-css')
+import imagemin from "gulp-imagemin";
+import webp from "gulp-webp";
+import avif from "gulp-avif";
 
-const imagemin = require('gulp-imagemin')
-const webp = require('gulp-webp')
+import rename from "gulp-rename";
+import concat from "gulp-concat";
+import watch from "gulp-watch";
 
-const rename = require('gulp-rename')
-const concat = require('gulp-concat')
-const watch = require('gulp-watch')
-
-
-const NON_BREAKING_HYPHEN = '‑'
+const NON_BREAKING_HYPHEN = "‑";
 const WATCHERS = {
-  html: ['./src/**/*.html'],
-  styles: ['./src/**/*.css'],
-  js: ['./src/**/*.js'],
-}
+  html: ["./src/**/*.html"],
+  styles: ["./src/**/*.css"],
+  js: ["./src/**/*.js"],
+};
 
-const typografRules = [{
-  name: 'common/other/nonBreakingHyphen',
-  handler: text => text.replace(/\-/g, NON_BREAKING_HYPHEN)
-}]
+const typografRules = [
+  {
+    name: "common/other/nonBreakingHyphen",
+    handler: (text) => text.replace(/\-/g, NON_BREAKING_HYPHEN),
+  },
+];
 
-gulp.task('html', function() {
-  return gulp.src('./src/index.html')
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
-    .pipe(typograf({ 
-      locale: ['ru', 'en-US'],
-      enableRule: ['ru/optalign/*'],
-      disableRule: [
-        'ru/nbsp/afterNumberSign',
-      ],
-      rules: typografRules
-    }))
-    .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('./dist/'))
-})
+gulp.task("html", function () {
+  return gulp
+    .src("./src/index.html")
+    .pipe(
+      fileinclude({
+        prefix: "@@",
+        basepath: "@file",
+      })
+    )
+    .pipe(
+      typograf({
+        locale: ["ru", "en-US"],
+        enableRule: ["ru/optalign/*"],
+        disableRule: ["ru/nbsp/afterNumberSign"],
+        rules: typografRules,
+      })
+    )
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest("./dist/"));
+});
 
-gulp.task('css', function() {
-  return gulp.src('./src/css/style.css')
+gulp.task("css", function () {
+  return gulp
+    .src("./src/css/style.css")
     .pipe(importCss())
-    .pipe(postcss([ autoprefixer({
-      browsers: ['last 4 versions', 'ios 7']
-    }) ]))
-    .pipe(gulp.dest('./dist/css/'))
-})
+    .pipe(gulp.dest("./dist/css/"));
+});
 
-gulp.task('js', function() {
-  return gulp.src('./src/js/*.js')
-    .pipe(gulp.dest('./dist/js/'))
-})
+gulp.task("js", function () {
+  return gulp
+    .src([
+      "./node_modules/prismjs/prism.js",
+      "./node_modules/prismjs/components/prism-diff.min.js",
+      "./node_modules/prismjs/components/prism-json.min.js",
+      "./node_modules/prismjs/plugins/line-numbers/prism-line-numbers.min.js",
+      "./node_modules/ilyabirman-likely/release/likely.min.js",
+    ])
+    .pipe(concat("libs.js"))
+    .pipe(gulp.dest("./dist/js/"));
+});
 
-gulp.task('images', function() {
-  // minify
-  gulp.src('./src/img/**/*.{jpg,png}')
+gulp.task("minify", function () {
+  return gulp
+    .src("./src/img/**/*.{jpg,png}")
     .pipe(imagemin())
-    .pipe(gulp.dest('./dist/img/'))
-  
-  // convert to webp
-  return gulp.src('./src/img/**/*.{jpg,png}')
+    .pipe(gulp.dest("./dist/img/"));
+});
+
+gulp.task("webp", function () {
+  return gulp
+    .src("./src/img/**/*.{jpg,png}")
     .pipe(webp())
-    .pipe(gulp.dest('./dist/img/'))
-})
+    .pipe(gulp.dest("./dist/img/"));
+});
 
-gulp.task('favicons', function() {
-  return gulp.src('./src/favicons/**/*')
-    .pipe(gulp.dest('./dist/favicons/'))
-})
+gulp.task("avif", function () {
+  return gulp
+    .src("./src/img/**/*.{jpg,png}")
+    .pipe(avif())
+    .pipe(gulp.dest("./dist/img/"));
+});
 
-gulp.task('watch', function() {
-  gulp.watch(WATCHERS.html, gulp.series('html'))
-  gulp.watch(WATCHERS.styles, gulp.series('css'))
-  gulp.watch(WATCHERS.js, gulp.series('js'))
-})
+gulp.task("images", gulp.series("minify", "webp", "avif"));
 
-gulp.task('default', gulp.series('html', 'css', 'js', 'images', 'favicons', 'watch'))
-gulp.task('build', gulp.series('html', 'css', 'js', 'images', 'favicons'))
+gulp.task("meta", function () {
+  return gulp.src("./src/meta/**/*").pipe(gulp.dest("./dist/meta/"));
+});
+
+gulp.task("watch", function () {
+  gulp.watch(WATCHERS.html, gulp.series("html"));
+  gulp.watch(WATCHERS.styles, gulp.series("css"));
+  gulp.watch(WATCHERS.js, gulp.series("js"));
+});
+
+gulp.task(
+  "default",
+  gulp.series("html", "css", "js", "images", "meta", "watch")
+);
+
+gulp.task("build", gulp.series("html", "css", "js", "images", "meta"));

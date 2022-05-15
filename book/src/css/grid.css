@@ -1,5 +1,5 @@
 .grid {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
 }
 
@@ -9,21 +9,21 @@
   min-width: 300px;
   padding: 0 20px 0 30px;
   background: white;
-  border-right:1px solid rgba(0,0,0,.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .text img {
-  max-width:100%;
+  max-width: 100%;
 }
 
 .code {
-  width:55%;
-  padding-bottom:1rem;
+  width: 55%;
+  padding-bottom: 1rem;
   position: relative;
 }
 
 .code-filename {
-  color:rgba(0,0,0,.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .grid:first-child .text {
@@ -33,28 +33,26 @@
   padding-bottom: 20px;
 }
 
-
 @media (max-width: 1000px) {
   .text,
   .code {
-    width:50%;
+    width: 50%;
   }
 }
 
 @media (max-width: 800px) {
   .text,
   .code {
-    width:100%;
-    max-width:100%;
-    border-right:0;
+    width: 100%;
+    max-width: 100%;
+    border-right: 0;
   }
 
   .code {
-    border:1px solid rgba(0,0,0,.1);
-    border-left:0;
-    border-right:0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 0;
+    border-right: 0;
     padding-top: 1rem;
-    padding-bottom:2rem;
   }
 
   .text {
@@ -62,6 +60,6 @@
   }
 
   .grid + .grid .text {
-    padding-top:1rem;
+    padding-top: 1rem;
   }
 }

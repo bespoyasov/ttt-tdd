@@ -1,5 +1,6 @@
-@import url(./_prism.css);
-@import url(./_likely.css);
+@import url(../../node_modules/prismjs/themes/prism.min.css);
+@import url(../../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.min.css);
+@import url(../../node_modules/ilyabirman-likely/release/likely.min.css);
 
 @import url(./global.css);
 @import url(./anchor.css);

@@ -11,11 +11,11 @@
     <div class='text'>
       <p>Допустим, в разработке изменились приоритеты. Теперь вам нужно написать ещё и журнал игры.</p>
       <p>В <abbr>TDD</abbr> с внезапными изменениями требований проблем нет. Цикл разработки короткий, поэтому больших изменений не происходит. Из-за этого всегда есть рабочая версия проекта, которую можно дорабатывать в какую угодно сторону.</p>
-      <p>В нашем примере мы переключаемся на историю ходов. Начнём с метода получения истории <i>getMoveHistory</i>.</p>
+      <p>В нашем примере мы переключаемся на историю ходов. Начнём с метода получения истории <code>getMoveHistory</code>.</p>
     </div>
 
     <div class='code'>
-<pre data-start='50'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Game saves user\'s move in history', () => { 
+<pre data-start='50'><div class='code-filename'>test/game.js</div><code class='language-js line-numbers'>test('Game saves user\'s move in history', () => {
   const x = 1, y = 1
 
   game.acceptUserMove(x, y)

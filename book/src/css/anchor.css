@@ -1,11 +1,11 @@
 .anchor,
 .anchor:visited {
   text-decoration: none;
-  color:black;
+  color: black;
   font-size: 1rem;
   position: absolute;
   left: -1.5rem;
-  width:1.5rem;
+  width: 1.5rem;
   display: block;
   top: 0.65em;
   line-height: 1.5em;
@@ -23,7 +23,7 @@ h2:hover .anchor {
 }
 
 @media (max-width: 800px) {
-  .anchor, 
+  .anchor,
   .anchor:visited {
     opacity: 1;
     line-height: inherit;

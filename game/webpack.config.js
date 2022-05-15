@@ -1,5 +1,6 @@
-import webpack from "webpack";
 import path from "path";
+import webpack from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 export default [
   {
@@ -13,5 +14,10 @@ export default [
       filename: "./js/bundle.js",
       path: path.resolve("dist"),
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: "./assets/index.html",
+      }),
+    ],
   },
 ];

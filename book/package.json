@@ -38,6 +38,7 @@
     "gulp-webp": "^4.0.1"
   },
   "dependencies": {
-    "ilyabirman-likely": "^2.6.0"
+    "ilyabirman-likely": "^2.6.0",
+    "prismjs": "^1.28.0"
   }
 }

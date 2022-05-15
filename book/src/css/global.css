@@ -92,6 +92,14 @@ pre[class*="language-"] {
   padding-top: 0.25rem;
 }
 
+p > code {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  white-space: nowrap;
+}
+
 .disclaimer,
 .disclaimer a {
   color: rgba(0, 0, 0, 0.3);

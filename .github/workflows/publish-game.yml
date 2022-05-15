@@ -7,6 +7,7 @@ on:
     paths:
       - "game/src/**"
       - "game/__tests__/**"
+      - ".github/workflows/publish-game.yml"
 
 jobs:
   publish:

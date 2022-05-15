@@ -4,7 +4,7 @@
   "description": "Пример разработки «Крестиков-ноликов» по TDD",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx gulp"
   },
   "repository": {
     "type": "git",

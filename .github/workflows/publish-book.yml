@@ -30,5 +30,6 @@ jobs:
           server: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           password: ${{ secrets.DEPLOY_PASSWORD }}
-          local-dir: "dist/"
+          state-name: ${{ secrets.DEPLOY_KEY_BOOK }}
+          local-dir: "book/dist/"
           log-level: minimal

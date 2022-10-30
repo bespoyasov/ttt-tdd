@@ -1,6 +1,6 @@
-# TTT-TDD
+> [Read description in English](./docs/en.md). The project translation is on the way. Stay tuned!
 
-> [In English](./docs/en.md)
+# TTT TDD
 
 TDD — практика разработки программ, в которой программисты вначале пишут тесты для новой функциональности, затем — реализацию этой функциональности, а после — проводят рефакторинг.
 

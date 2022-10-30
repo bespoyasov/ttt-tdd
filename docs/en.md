@@ -10,6 +10,6 @@ This book offers an example of developing a tic-tac-toe game using TDD methodolo
 
 ## Sources
 
-- [Online book explaining the methodology and examples](https://bespoyasov.ru/ttt-tdd/)
+- [Online book explaining the methodology and examples (in Russian)](https://bespoyasov.ru/ttt-tdd/)
 - [Developed Game](https://bespoyasov.ru/ttt-tdd/game/)
 - [Source code for the game and tests](https://github.com/bespoyasov/ttt-tdd/tree/master/game)

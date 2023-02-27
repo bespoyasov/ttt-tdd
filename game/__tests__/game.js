@@ -11,6 +11,7 @@ import {
 } from "../src/const";
 
 let game;
+
 beforeEach(() => {
   game = new Game();
 });

@@ -28,7 +28,7 @@ const createInstance = (game = {}) => {
 };
 
 beforeEach(() => {
-  window.alert = jest.spyOn(window, "alert");
+  window.alert = jest.fn();
 });
 
 afterEach(() => {
